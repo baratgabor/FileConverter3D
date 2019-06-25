@@ -88,7 +88,7 @@
     <Compile Include="Common\Model\Vector2.cs" />
     <Compile Include="Common\Model\Vector3.cs" />
     <Compile Include="ObjAscii\LineFilterProxy.cs" />
-    <Compile Include="Common\CompositeParser.cs" />
+    <Compile Include="Common\ParserChain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\TextLineReader.cs" />
     <Compile Include="StlBinary\TriangleDataParser.cs" />

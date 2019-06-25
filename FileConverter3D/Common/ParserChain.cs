@@ -7,11 +7,11 @@ namespace FileConverter3D.Common
     /// <summary>
     /// Composite wrapper for value parsers. Finds and uses the first valid parser.
     /// </summary>
-    internal class CompositeParser<TParsable> : IValueParser<TParsable>
+    internal class ParserChain<TParsable> : IValueParser<TParsable>
     {
         protected readonly List<IValueParser<TParsable>> _parsers;
 
-        public CompositeParser(params IValueParser<TParsable>[] parsers)
+        public ParserChain(params IValueParser<TParsable>[] parsers)
             => _parsers = new List<IValueParser<TParsable>>(parsers);
 
         public bool CanParse(TParsable parsable)
