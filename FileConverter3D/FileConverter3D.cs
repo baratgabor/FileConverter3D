@@ -7,9 +7,9 @@ namespace FileConverter3D
     /// </summary>
     public static class FileConverter3D
     {
-        // This is a simple static composition root.
-        // Common reusable and specific components can be mixed and matched
-        // to build the required object graph for a given file format.
+        // This is a simple static composition root for building the object graphs responsible for file format input/ouput.
+        // Reusable common and format-specific components can be mixed & matched.
+        // Proxies, decorators, composites, etc. can be easily added to the pipeline.
 
         public static class Import
         {
@@ -33,7 +33,7 @@ namespace FileConverter3D
                                 new ObjAscii.NormalParser(),
                                 new ObjAscii.TextureCoordParser(),
                                 new ObjAscii.FaceParser()),
-                        valueWriter:
+                        modelWriter:
                             new ObjAscii.ModelWriterDecorator_FaceIndexCorrection(
                                 new Common.ModelWriter(() => new Model())
                                 ));
@@ -56,7 +56,7 @@ namespace FileConverter3D
                             new StlBinary.TriangleDataReader(),
                         valueParser:
                             new StlBinary.TriangleDataParser(),
-                        valueWriter:
+                        modelWriter:
                             new Common.ModelWriter(() => new Model())
                             );
 
@@ -91,7 +91,7 @@ namespace FileConverter3D
             {
                 new Common.FileExporter<IValue>(
                     new Common.ModelReader(),
-                    new StlBinary.StlBinaryWriter(),
+                    new ObjAscii.ValueToObjAsciiWriter(),
                     new Common.WritingStream())
                 .Export(filePath, model);
             }

@@ -10,22 +10,22 @@
         protected readonly IFileStreamer _fileStreamer;
         protected readonly IValueReader<TIntermediate> _valueReader;
         protected readonly IValueParser<TIntermediate> _valueParser;
-        protected readonly IModelWriter _valueWriter;
+        protected readonly IModelWriter _modelWriter;
 
         public FileImporter(
             IFileStreamer fileStreamer,
             IValueReader<TIntermediate> valueReader,
             IValueParser<TIntermediate> valueParser,
-            IModelWriter valueWriter)
+            IModelWriter modelWriter)
         {
             _fileStreamer = fileStreamer;
             _valueReader = valueReader;
             _valueParser = valueParser;
-            _valueWriter = valueWriter;
+            _modelWriter = modelWriter;
         }
 
         public IModel Import(string filePath) => 
-            _valueWriter.Write(
+            _modelWriter.Write(
                 _valueParser.Parse(
                     _valueReader.Read(
                         _fileStreamer.GetStream(filePath))));
