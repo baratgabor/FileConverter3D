@@ -6,12 +6,12 @@ namespace FileConverter3D.ObjAscii
     /// <summary>
     /// Intercepts faces, checks if they are negatively indexed, and converts them to positive indexing.
     /// </summary>
-    class ModelWriterDecorator_FaceIndexCorrection : IValueWriter<IModel>
+    class ModelWriterDecorator_FaceIndexCorrection : IModelWriter
     {
-        protected IValueWriter<IModel> _decoratee;
+        protected IModelWriter _decoratee;
         protected int _vertIndx, _textIndx, _normIndx;
 
-        public ModelWriterDecorator_FaceIndexCorrection(IValueWriter<IModel> decoratee)
+        public ModelWriterDecorator_FaceIndexCorrection(IModelWriter decoratee)
             => _decoratee = decoratee;
 
         public IModel Write(IEnumerable<IValue> values)

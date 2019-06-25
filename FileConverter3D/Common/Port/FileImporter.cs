@@ -10,13 +10,13 @@
         protected readonly IFileStreamer _fileStreamer;
         protected readonly IValueReader<TIntermediate> _valueReader;
         protected readonly IValueParser<TIntermediate> _valueParser;
-        protected readonly IValueWriter<IModel> _valueWriter;
+        protected readonly IModelWriter<IModel> _valueWriter;
 
         public FileImporter(
             IFileStreamer fileStreamer,
             IValueReader<TIntermediate> valueReader,
             IValueParser<TIntermediate> valueParser,
-            IValueWriter<IModel> valueWriter)
+            IModelWriter<IModel> valueWriter)
         {
             _fileStreamer = fileStreamer;
             _valueReader = valueReader;

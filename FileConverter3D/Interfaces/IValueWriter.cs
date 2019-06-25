@@ -2,8 +2,8 @@
 
 namespace FileConverter3D
 {
-    public interface IValueWriter<TDestination> : IValueVisitor
+    public interface IModelWriter : IValueVisitor
     {
-        TDestination Write(IEnumerable<IValue> values);
+        IModel Write(IEnumerable<IValue> values);
     }
 }

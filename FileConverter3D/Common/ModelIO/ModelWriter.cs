@@ -7,7 +7,7 @@ namespace FileConverter3D.Common
     /// <summary>
     /// Writes values into a new model.
     /// </summary>
-    class ModelWriter : IValueWriter<IModel>
+    class ModelWriter : IModelWriter
     {
         protected Func<IModel> _modelFactory;
         protected IModel _model;
