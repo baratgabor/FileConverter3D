@@ -25,7 +25,7 @@ namespace FileConverter3D.StlBinary
         {
             //TODO: Consider populating struct StlTriangle via Marshal.PtrToStruct() instead?
 
-            var i = 0;
+            var byteArrayPosition = 0;
 
             _cache.Values.Clear();
             _cache.Values.Add(ReadNormal());
@@ -33,19 +33,12 @@ namespace FileConverter3D.StlBinary
             _cache.Values.Add(ReadVertex());
             _cache.Values.Add(ReadVertex());
             _cache.Values.Add(new Face(
-                (_vertIndx++, null, _normIndx++),
-                (_vertIndx++, null, _normIndx),
-                (_vertIndx++, null, _normIndx)
+                new FaceVertex(_vertIndx++, null, _normIndx++),
+                new FaceVertex(_vertIndx++, null, _normIndx),
+                new FaceVertex(_vertIndx++, null, _normIndx)
             ));
 
             return _cache;
-
-            float ReadFloat()
-            {
-                var res = BitConverter.ToSingle(parsable, i);
-                i += 4;
-                return res;
-            }
 
             Normal ReadNormal() =>
                 new Normal(
@@ -60,6 +53,13 @@ namespace FileConverter3D.StlBinary
                     ReadFloat(),
                     ReadFloat()
                 );
+
+            float ReadFloat()
+            {
+                var res = BitConverter.ToSingle(parsable, byteArrayPosition);
+                byteArrayPosition += 4;
+                return res;
+            }
         }
     }
 }

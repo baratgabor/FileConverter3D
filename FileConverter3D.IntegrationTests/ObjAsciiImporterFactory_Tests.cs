@@ -49,12 +49,13 @@ namespace FileConverter3D.IntegrationTests
             expectedModel.AddTextureCoord(new TextureCoord(0.123f, 0.434f));
             expectedModel.AddTextureCoord(new TextureCoord(0, 0));
 
-            var face = new Face();
-            face.AddFaceVertex((1, 1, 1));
-            face.AddFaceVertex((2, 2, 2));
-            face.AddFaceVertex((3, 3, 3));
-            face.AddFaceVertex((4, 4, 4));
-            expectedModel.AddFace(face);
+            expectedModel.AddFace(
+                new Face(
+                    new FaceVertex(1, 1, 1),
+                    new FaceVertex(2, 2, 2),
+                    new FaceVertex(3, 3, 3),
+                    new FaceVertex(4, 4, 4)
+                ));
 
             IModel resModel = null; //\FileConverter3D.Import.ObjAscii();
 

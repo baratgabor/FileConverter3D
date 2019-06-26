@@ -87,23 +87,23 @@ namespace FileConverter3D
             return face;
         }
 
-        private bool TryParseFaceVertex(string vertexString, out (int v, int? vn, int? vt) faceVertex)
+        private bool TryParseFaceVertex(string vertexString, out FaceVertex faceVertex)
         {
-            faceVertex = (0, null, null);
+            faceVertex = new FaceVertex(0, null, null);
             var segments = vertexString.Split(new[] { '/' }, StringSplitOptions.None);
 
-            faceVertex.v = ParseOne(segments[0], out var success);
+            faceVertex.VertexIndex = ParseOne(segments[0], out var success);
             if (!success) return false;
 
             if (segments.Length > 1 && segments[1].Length > 0)
             {
-                faceVertex.vt = ParseOne(segments[1], out success);
+                faceVertex.TextureCoordIndex = ParseOne(segments[1], out success);
                 if (!success) return false;
             }
 
             if (segments.Length > 2 && segments[2].Length > 0)
             {
-                faceVertex.vn = ParseOne(segments[2], out success);
+                faceVertex.NormalIndex = ParseOne(segments[2], out success);
                 if (!success) return false;
             }
 

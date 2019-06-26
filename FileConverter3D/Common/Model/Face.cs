@@ -2,25 +2,22 @@
 
 namespace FileConverter3D
 {
+    /// <summary>
+    /// Represents a single face in a mesh.
+    /// </summary>
     public class Face : IValue
     {
-        public List<(int v, int? vt, int? vn)> FaceVertices;
+        public List<FaceVertex> Vertices = new List<FaceVertex>();
+        public bool IsTriangle => Vertices.Count == 3;
+        public bool IsQuad => Vertices.Count == 4;
 
-        public Face()
-        {}
+        public Face() { }
 
-        public Face(params (int v, int? vt, int? vn)[] vertices)
-        {
-            FaceVertices = new List<(int v, int? vt, int? vn)>(vertices);
-        }
+        public Face(params FaceVertex[] faceVertices)
+            => Vertices.AddRange(faceVertices);
 
-        public void AddFaceVertex((int v, int? vt, int? vn) vertex)
-        {
-            if (FaceVertices == null)
-                FaceVertices = new List<(int v, int? vt, int? vn)>();
-
-            FaceVertices.Add(vertex);
-        }
+        public void AddFaceVertex(FaceVertex vertex)
+            => Vertices.Add(vertex);
 
         public void Accept(IValueVisitor visitor)
             => visitor.Visit(this);
@@ -30,11 +27,11 @@ namespace FileConverter3D
             if (!(obj is Face other))
                 return false;
 
-            if (FaceVertices.Count != other.FaceVertices.Count)
+            if (Vertices.Count != other.Vertices.Count)
                 return false;
 
-            for (int i = 0; i < FaceVertices.Count; i++)
-                if (FaceVertices[i] != other.FaceVertices[i])
+            for (int i = 0; i < Vertices.Count; i++)
+                if (Vertices[i] != other.Vertices[i])
                     return false;
 
             return true;

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ModelIO\ModelReader.cs" />
+    <Compile Include="Common\FaceResolver.cs" />
+    <Compile Include="Common\Model\FaceVertex.cs" />
     <Compile Include="ObjAscii\ModelWriterDecorator_FaceIndexCorrection.cs" />
     <Compile Include="Common\Port\FileExporter.cs" />
     <Compile Include="Interfaces\IModelReader.cs" />

@@ -27,11 +27,11 @@ namespace FileConverter3D.StlBinary
 
         /// <summary>
         /// Triangulates super-3 vertex faces the simplest way possible. 3 vertex faces are returned unchanged.
-        /// Assumes that faces are convex and flat.
+        /// Assumes that faces are convex and vertices are ordered counter-clockwise (or clockwise).
         /// </summary>
         protected IEnumerable<(Vertex A, Vertex B, Vertex C)> NaiveTriangulate(Face face, IModel model)
         {
-            var vertCount = face.FaceVertices.Count;
+            var vertCount = face.Vertices.Count;
 
             if (vertCount < 3)
                 throw new ArgumentException($"Invalid face with vertex count of {vertCount}. A valid face must contain at least 3 vertices.");
@@ -41,11 +41,11 @@ namespace FileConverter3D.StlBinary
             {
                 //TODO: Single responsibility; this function does vertex lookup too besides the triangulation.
                 yield return (
-                    A: model.Vertices.ElementAt(face.FaceVertices[i].v - 1),
-                    B: model.Vertices.ElementAt(face.FaceVertices[i + 1].v - 1),
+                    A: model.Vertices.ElementAt(face.Vertices[i].VertexIndex - 1),
+                    B: model.Vertices.ElementAt(face.Vertices[i + 1].VertexIndex - 1),
 
                     // Notice modulo: Index C overflows to index 0 at last step
-                    C: model.Vertices.ElementAt(face.FaceVertices[i + 2 % vertCount].v - 1)
+                    C: model.Vertices.ElementAt(face.Vertices[i + 2 % vertCount].VertexIndex - 1)
                 );
             }
         }

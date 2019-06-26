@@ -49,21 +49,21 @@ namespace FileConverter3D.ObjAscii
             }
 
             bool IsNegativeIndexed(Face face)
-                => face.FaceVertices[0].v < 0;
+                => face.Vertices[0].VertexIndex < 0;
         }
 
         private IValue ConvertToPositiveIndex(Face f)
         {
-            var vertNum = f.FaceVertices.Count;
+            var vertNum = f.Vertices.Count;
             for (int i = 0; i < vertNum; i++)
             {
-                var v = f.FaceVertices[i];
+                var v = f.Vertices[i];
 
                 //TODO: Null check for vt & vn
-                f.FaceVertices[i] = (
-                    v: v.v < 0 ? v.v + _vertIndx : v.v,
-                    vt: v.vt < 0 ? v.vt + _textIndx : v.vt,
-                    vn: v.vn < 0 ? v.vn + _normIndx : v.vn
+                f.Vertices[i] = new FaceVertex(
+                    vertexIndex: v.VertexIndex < 0 ? v.VertexIndex + _vertIndx : v.VertexIndex,
+                    textureCoordIndex: v.TextureCoordIndex < 0 ? v.TextureCoordIndex + _textIndx : v.TextureCoordIndex,
+                    normalIndex: v.NormalIndex < 0 ? v.NormalIndex + _normIndx : v.NormalIndex
                 );
             }
 
