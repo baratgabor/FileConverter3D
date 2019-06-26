@@ -2,7 +2,7 @@
 
 namespace FileConverter3D
 {
-    struct CompositeValue : IValue
+    class CompositeValue : IValue
     {
         public List<IValue> Values;
 
