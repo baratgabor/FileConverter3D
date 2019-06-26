@@ -2,9 +2,9 @@
 {
     public struct Normal : IValue
     {
-        public float x;
-        public float y;
-        public float z;
+        public readonly float x;
+        public readonly float y;
+        public readonly float z;
 
         public Normal(float x, float y, float z)
         {

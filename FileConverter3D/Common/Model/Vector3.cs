@@ -11,9 +11,9 @@ namespace FileConverter3D
     {
         public static Vector3 Zero => new Vector3(0, 0, 0);
 
-        public float X { get; private set; }
-        public float Y { get; private set; }
-        public float Z { get; private set; }
+        public readonly float X;
+        public readonly float Y;
+        public readonly float Z;
 
         public Vector3(float x, float y, float z)
         {
@@ -41,7 +41,7 @@ namespace FileConverter3D
             return true;
 
             Fail:
-            vector3 = Vector3.Zero;
+            vector3 = Zero;
             return false;
         }
     }

@@ -11,8 +11,8 @@ namespace FileConverter3D
     {
         public static Vector2 Zero => new Vector2(0, 0);
 
-        public float X { get; private set; }
-        public float Y { get; private set; }
+        public readonly float X;
+        public readonly float Y;
 
         public Vector2(float x, float y)
         {

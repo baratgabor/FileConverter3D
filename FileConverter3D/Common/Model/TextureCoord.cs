@@ -2,8 +2,8 @@
 {
     public struct TextureCoord : IValue
     {
-        public float x;
-        public float y;
+        public readonly float x;
+        public readonly float y;
 
         public TextureCoord(float x, float y)
         {
