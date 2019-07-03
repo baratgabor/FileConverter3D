@@ -1,4 +1,7 @@
 ﻿using System;
+using Common = FileConverter3D.Core.Common;
+using ObjAscii = FileConverter3D.Core.ObjAscii;
+using StlBinary = FileConverter3D.Core.StlBinary;
 
 namespace FileConverter3D
 {
@@ -94,15 +97,31 @@ namespace FileConverter3D
 
         public static class Transform
         {
-            public static IModel Translate(IModel model)
+            public static IModel Translate(IModel model, IVector3 translation)
             {
-                throw new NotImplementedException();
+                var transModel = GetTransformableModel(model);
+                transModel.SetTranslation(translation);
+                return transModel;
             }
 
-            public static IModel Rotate(IModel model)
+            public static IModel Rotate(IModel model, IVector3 eulers)
             {
-                throw new NotImplementedException();
+                var transModel = GetTransformableModel(model);
+                transModel.SetRotation(eulers);
+                return transModel;
             }
+
+            public static IModel Scale(IModel model, IVector3 scale)
+            {
+                var transModel = GetTransformableModel(model);
+                transModel.SetScale(scale);
+                return transModel;
+            }
+
+            private static ITransformableModel GetTransformableModel(IModel model)
+                => model is ITransformableModel ? 
+                    model as ITransformableModel : 
+                    new ModelTransformationDecorator(model);
         }
 
         public static class Analyze
