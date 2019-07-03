@@ -1,18 +1,25 @@
-﻿namespace FileConverter3D.StlBinary
+﻿using System;
+using System.Runtime.InteropServices;
+
+namespace FileConverter3D.StlBinary
 {
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
     struct StlTriangle : IValue
     {
         public Vertex Normal;
         public Vertex A;
         public Vertex B;
         public Vertex C;
+        public ushort AttribByteCount;
 
-        public StlTriangle(Vertex normal, Vertex a, Vertex b, Vertex c)
+        public StlTriangle(Vertex normal, Vertex a, Vertex b, Vertex c, ushort attribByteCount = default)
         {
             Normal = normal;
             A = a;
             B = b;
             C = c;
+            AttribByteCount = attribByteCount;
         }
 
         public void Accept(IValueVisitor visitor)

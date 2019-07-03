@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D14FECE7-33E4-4B1C-B5EB-7F0B5C28972E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>FileConverter3D.Console</RootNamespace>
-    <AssemblyName>FileConverter3D.Console</AssemblyName>
+    <ProjectGuid>{8FFA6F04-8149-4FFC-91A1-F2101DBFD627}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FileConverter3D.ModelProcessing</RootNamespace>
+    <AssemblyName>FileConverter3D.ModelProcessing</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,20 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IModelCalculation.cs" />
+    <Compile Include="IModelTransformation.cs" />
+    <Compile Include="Matrix4x4.cs" />
+    <Compile Include="ModelSurfaceAreaCalculator.cs" />
+    <Compile Include="ModelTransformationDecorator.cs" />
+    <Compile Include="ModelVolumeCalculator.cs" />
+    <Compile Include="PointIsInsideMesh.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileConverter3D.Model\FileConverter3D.Model.csproj">
       <Project>{12e9ded0-6f7a-4082-8a27-9305b4df8719}</Project>
       <Name>FileConverter3D.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileConverter3D\FileConverter3D.csproj">
-      <Project>{80cf0dff-74c2-4985-83d7-c4924cd70b60}</Project>
-      <Name>FileConverter3D</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

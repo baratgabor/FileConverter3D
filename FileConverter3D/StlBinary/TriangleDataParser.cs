@@ -8,6 +8,7 @@ namespace FileConverter3D.StlBinary
     /// </summary>
     class TriangleDataParser : IValueParser<byte[]>
     {
+        // Reusing CompositeValue saves on allocation, but it's a leaky abstraction, because it relies on knowledge about how another layer uses the instance.
         protected CompositeValue _cache = new CompositeValue() { Values = new List<IValue>() };
         protected int _vertIndx, _normIndx;
 

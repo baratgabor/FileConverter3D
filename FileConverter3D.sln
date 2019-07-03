@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter3D", "FileConverter3D\FileConverter3D.csproj", "{80CF0DFF-74C2-4985-83D7-C4924CD70B60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter3D.UnitTests", "FileConverter3D.UnitTests\FileConverter3D.UnitTests.csproj", "{089AB8D2-9EB3-496C-9D37-951571ED8CD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter3D.Tests", "FileConverter3D.Tests\FileConverter3D.Tests.csproj", "{089AB8D2-9EB3-496C-9D37-951571ED8CD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter3D.Console", "FileConverter3D.Console\FileConverter3D.Console.csproj", "{D14FECE7-33E4-4B1C-B5EB-7F0B5C28972E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter3D.IntegrationTests", "FileConverter3D.IntegrationTests\FileConverter3D.IntegrationTests.csproj", "{E4B48D4C-2AA5-4601-8429-38E5E11CC817}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter3D.Model", "FileConverter3D.Model\FileConverter3D.Model.csproj", "{12E9DED0-6F7A-4082-8A27-9305B4DF8719}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConverter3D.ModelProcessing", "FileConverter3D.ModelProcessing\FileConverter3D.ModelProcessing.csproj", "{8FFA6F04-8149-4FFC-91A1-F2101DBFD627}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,14 @@ Global
 		{D14FECE7-33E4-4B1C-B5EB-7F0B5C28972E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D14FECE7-33E4-4B1C-B5EB-7F0B5C28972E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D14FECE7-33E4-4B1C-B5EB-7F0B5C28972E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4B48D4C-2AA5-4601-8429-38E5E11CC817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4B48D4C-2AA5-4601-8429-38E5E11CC817}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4B48D4C-2AA5-4601-8429-38E5E11CC817}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4B48D4C-2AA5-4601-8429-38E5E11CC817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E9DED0-6F7A-4082-8A27-9305B4DF8719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E9DED0-6F7A-4082-8A27-9305B4DF8719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E9DED0-6F7A-4082-8A27-9305B4DF8719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E9DED0-6F7A-4082-8A27-9305B4DF8719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FFA6F04-8149-4FFC-91A1-F2101DBFD627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FFA6F04-8149-4FFC-91A1-F2101DBFD627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FFA6F04-8149-4FFC-91A1-F2101DBFD627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FFA6F04-8149-4FFC-91A1-F2101DBFD627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

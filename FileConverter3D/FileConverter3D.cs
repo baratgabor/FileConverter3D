@@ -20,25 +20,20 @@ namespace FileConverter3D
             /// <returns>The imported model.</returns>
             public static IModel ObjAscii(string filePath)
             {
-                var objAsciiImporter =
+                return
                     new Common.FileImporter<string>(
-                        fileStreamer:
-                            new Common.ReadingStream(),
-                        valueReader:
-                            new ObjAscii.LineFilterProxy(
-                                new Common.TextLineReader()),
-                        valueParser:
-                            new Common.CompositeParser<string>(
-                                new ObjAscii.VertexParser(),
-                                new ObjAscii.NormalParser(),
-                                new ObjAscii.TextureCoordParser(),
-                                new ObjAscii.FaceParser()),
-                        modelWriter:
-                            new ObjAscii.ModelWriterDecorator_FaceIndexCorrection(
-                                new Common.ModelWriter(() => new Model())
-                                ));
+                        new Common.ReadingStream(),
+                        new ObjAscii.LineFilterProxy(
+                            new Common.TextLineReader()),
+                        new Common.ParserChain<string>(
+                            new ObjAscii.VertexParser(),
+                            new ObjAscii.NormalParser(),
+                            new ObjAscii.TextureCoordParser(),
+                            new ObjAscii.FaceParser()),
+                        new ObjAscii.ModelWriterDecorator_FaceIndexCorrection(
+                            new Common.ModelWriter(() => new Model())))
 
-                return objAsciiImporter.Import(filePath);
+                .Import(filePath);
             }
 
             /// <summary>
@@ -48,19 +43,14 @@ namespace FileConverter3D
             /// <returns>The imported model.</returns>
             public static IModel StlBinary(string filePath)
             {
-                var stlBinaryImporter =
+                return
                     new Common.FileImporter<byte[]>(
-                        fileStreamer:
-                            new Common.ReadingStream(),
-                        valueReader:
-                            new StlBinary.TriangleDataReader(),
-                        valueParser:
-                            new StlBinary.TriangleDataParser(),
-                        modelWriter:
-                            new Common.ModelWriter(() => new Model())
-                            );
+                        new Common.ReadingStream(),
+                        new StlBinary.TriangleDataReader(),
+                        new StlBinary.TriangleDataParser(),
+                        new Common.ModelWriter(() => new Model()))
 
-                return stlBinaryImporter.Import(filePath);
+                .Import(filePath);
             }
         }
 
@@ -74,10 +64,13 @@ namespace FileConverter3D
             /// <exception cref="IOException">If the target file already exists.</exception>
             public static void StlBinary(IModel model, string filePath)
             {
-                new Common.FileExporter<StlBinary.StlTriangle>(
-                    new StlBinary.TriangleExtractor(),
+                new Common.FileExporter<StlBinary.StlTriangle, byte[]>(
+                    new StlBinary.TriangleExtractor(
+                        new Common.NaiveTriangulate()),
+                    new StlBinary.TriangleSerializer(),
                     new StlBinary.StlBinaryWriter(),
                     new Common.WritingStream())
+
                 .Export(filePath, model);
             }
 
@@ -89,10 +82,12 @@ namespace FileConverter3D
             /// <exception cref="IOException">If the target file already exists.</exception>
             public static void ObjAscii(IModel model, string filePath)
             {
-                new Common.FileExporter<IValue>(
+                new Common.FileExporter<IValue, string>(
                     new Common.ModelReader(),
-                    new ObjAscii.ValueToObjAsciiWriter(),
+                    new ObjAscii.CombinedValueSerializer(),
+                    new ObjAscii.ObjAsciiWriter(),
                     new Common.WritingStream())
+
                 .Export(filePath, model);
             }
         }
@@ -113,19 +108,16 @@ namespace FileConverter3D
         public static class Analyze
         {
             public static float CalculateSurfaceArea(IModel model)
-            {
-                throw new NotImplementedException();
-            }
+                => new ModelSurfaceAreaCalculator(
+                    new Common.NaiveTriangulate()).Calculate(model);
 
             public static float CalculateVolume(IModel model)
-            {
-                throw new NotImplementedException();
-            }
+                => new ModelVolumeCalculator(
+                    new Common.NaiveTriangulate()).Calculate(model);
 
             public static bool Intersect(IModel model, Vector3 point)
-            {
-                throw new NotImplementedException();
-            }
+                => new PointIsInsideMesh(
+                    new Common.NaiveTriangulate(), point).Calculate(model);
         }
     }
 }

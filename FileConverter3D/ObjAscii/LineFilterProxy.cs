@@ -7,11 +7,11 @@ namespace FileConverter3D.ObjAscii
     /// Filters out not supported lines early to improve parsing performance.
     /// Requires manual update if support is implemented for additional line types.
     /// </summary>
-    class LineFilterProxy : IValueReader<string>
+    class LineFilterProxy : IDataReader<string>
     {
-        protected IValueReader<string> _proxied;
+        protected IDataReader<string> _proxied;
 
-        public LineFilterProxy(IValueReader<string> proxied)
+        public LineFilterProxy(IDataReader<string> proxied)
             => _proxied = proxied;
 
         public IEnumerable<string> Read(Stream stream)

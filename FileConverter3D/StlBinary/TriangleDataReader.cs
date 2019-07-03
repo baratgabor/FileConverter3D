@@ -6,7 +6,7 @@ namespace FileConverter3D.StlBinary
     /// <summary>
     /// Reads STL triangle units as raw byte arrays from a stream.
     /// </summary>
-    class TriangleDataReader : IValueReader<byte[]>
+    class TriangleDataReader : IDataReader<byte[]>
     {
         //TODO: Consider using a well-defined struct instead of byte[]; more explicit
         protected const int HeaderLength = 80;

@@ -41,65 +41,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ModelIO\ModelReader.cs" />
-    <Compile Include="Common\FaceResolver.cs" />
-    <Compile Include="Common\Model\FaceVertex.cs" />
+    <Compile Include="Common\IO_Model\ModelReader.cs" />
+    <Compile Include="Common\Utils\FaceResolver.cs" />
+    <Compile Include="Common\IO_Master\IValueSerializer.cs" />
+    <Compile Include="ObjAscii\Serializers\CombinedValueSerializer.cs" />
+    <Compile Include="Common\Utils\NaiveTriangulate.cs" />
+    <Compile Include="Common\Utils\ITriangulator.cs" />
+    <Compile Include="StlBinary\TriangleSerializer.cs" />
     <Compile Include="ObjAscii\ModelWriterDecorator_FaceIndexCorrection.cs" />
-    <Compile Include="Common\Port\FileExporter.cs" />
-    <Compile Include="Interfaces\IModelReader.cs" />
-    <Compile Include="Common\IO\WritingStream.cs" />
-    <Compile Include="IFileWriter.cs" />
-    <Compile Include="ObjAscii\ValueToObjAsciiWriter.cs" />
+    <Compile Include="Common\IO_Master\FileExporter.cs" />
+    <Compile Include="Common\IO_Model\IModelReader.cs" />
+    <Compile Include="Common\IO_File\WritingStream.cs" />
+    <Compile Include="Common\IO_Master\IDataWriter.cs" />
+    <Compile Include="ObjAscii\ObjAsciiWriter.cs" />
     <Compile Include="StlBinary\TriangleExtractor.cs" />
     <Compile Include="StlBinary\StlBinaryWriter.cs" />
     <Compile Include="StlBinary\StlTriangle.cs" />
     <Compile Include="FileConverter3D.cs" />
-    <Compile Include="Common\IO\ReadingStream.cs" />
-    <Compile Include="Interfaces\IFileReader.cs" />
-    <Compile Include="Interfaces\IValueWriter.cs" />
-    <Compile Include="Common\Model\CompositeValue.cs" />
-    <Compile Include="Interfaces\IFaceSource.cs" />
-    <Compile Include="Interfaces\IFaceStore.cs" />
-    <Compile Include="Interfaces\INormalSource.cs" />
-    <Compile Include="Interfaces\INormalStore.cs" />
-    <Compile Include="Interfaces\ITextureCoordSource.cs" />
-    <Compile Include="Interfaces\ITextureCoordStore.cs" />
-    <Compile Include="Interfaces\IVertexSource.cs" />
-    <Compile Include="Interfaces\IVertexStore.cs" />
+    <Compile Include="Common\IO_File\ReadingStream.cs" />
+    <Compile Include="Common\IO_File\IFileStreamer.cs" />
+    <Compile Include="Common\IO_Model\IModelWriter.cs" />
     <Compile Include="ObjAscii\Parsers\FaceParser.cs" />
     <Compile Include="ObjAscii\Parsers\NormalParser.cs" />
     <Compile Include="ObjAscii\Parsers\_ObjAsciiParserBase.cs" />
     <Compile Include="ObjAscii\Parsers\TextureCoordParser.cs" />
     <Compile Include="ObjAscii\Parsers\VertexParser.cs" />
-    <Compile Include="Common\Model\Normal.cs" />
-    <Compile Include="Common\Model\TextureCoord.cs" />
-    <Compile Include="Common\Model\Vertex.cs" />
-    <Compile Include="Common\Port\FileImporter.cs" />
-    <Compile Include="Interfaces\IValue.cs" />
-    <Compile Include="Interfaces\IValueVisitor.cs" />
-    <Compile Include="Interfaces\IValueParser.cs" />
-    <Compile Include="Interfaces\IValueReader.cs" />
-    <Compile Include="Common\ModelIO\ModelWriter.cs" />
-    <Compile Include="Common\Model\Face.cs" />
-    <Compile Include="Interfaces\IFileImporter.cs" />
-    <Compile Include="Interfaces\IFileExporter.cs" />
-    <Compile Include="Interfaces\IModel.cs" />
-    <Compile Include="Interfaces\IModelCalculation.cs" />
-    <Compile Include="Interfaces\IModelTransformation.cs" />
-    <Compile Include="Common\Model\Model.cs" />
-    <Compile Include="Common\Model\Vector2.cs" />
-    <Compile Include="Common\Model\Vector3.cs" />
+    <Compile Include="Common\IO_Master\FileImporter.cs" />
+    <Compile Include="Common\IO_Model\IValueVisitor.cs" />
+    <Compile Include="Common\IO_Master\IValueParser.cs" />
+    <Compile Include="Common\IO_Master\IDataReader.cs" />
+    <Compile Include="Common\IO_Model\ModelWriter.cs" />
+    <Compile Include="Common\IO_Master\IFileImporter.cs" />
+    <Compile Include="Common\IO_Master\IFileExporter.cs" />
     <Compile Include="ObjAscii\LineFilterProxy.cs" />
-    <Compile Include="Common\ParserChain.cs" />
+    <Compile Include="Common\Utils\ParserChain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\TextLineReader.cs" />
+    <Compile Include="Common\Utils\TextLineReader.cs" />
     <Compile Include="StlBinary\TriangleDataParser.cs" />
     <Compile Include="StlBinary\TriangleDataReader.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ObjAscii\Readers\" />
-    <Folder Include="ObjAscii\Writers\" />
-    <Folder Include="StlBinary\Writers\" />
+    <ProjectReference Include="..\FileConverter3D.Model\FileConverter3D.Model.csproj">
+      <Project>{12e9ded0-6f7a-4082-8a27-9305b4df8719}</Project>
+      <Name>FileConverter3D.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

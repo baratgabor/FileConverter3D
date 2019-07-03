@@ -1,69 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace FileConverter3D.StlBinary
 {
     /// <summary>
     /// Extracts model data to create STL triangles.
     /// </summary>
-    class TriangleExtractor : Common.IModelReader<StlTriangle>
+    class TriangleExtractor : IModelReader<StlTriangle>
     {
+        protected ITriangulator _triangulator;
+
+        public TriangleExtractor(ITriangulator triangulator)
+            => _triangulator = triangulator;
+
         public IEnumerable<StlTriangle> Read(IModel model)
         {
-            foreach (var face in model.Faces)
-            {
-                foreach (var (A, B, C) in NaiveTriangulate(face, model))
-                {
+            var vertexList = new List<Vertex>();
+            foreach (var faceVertices in model.GetFaceVertices(model.Faces, vertexList))
+                foreach (var (a, b, c) in _triangulator.Triangulate(faceVertices))
                     yield return new StlTriangle(
-                        normal: CalculateFaceNormal(A, B, C),
-                        a: A,
-                        b: B,
-                        c: C
+                        normal: CalculateFaceNormal(a, b, c),
+                        a: a,
+                        b: b,
+                        c: c
                     );
-                }
-            }
-        }
-
-        /// <summary>
-        /// Triangulates super-3 vertex faces the simplest way possible. 3 vertex faces are returned unchanged.
-        /// Assumes that faces are convex and vertices are ordered counter-clockwise (or clockwise).
-        /// </summary>
-        protected IEnumerable<(Vertex A, Vertex B, Vertex C)> NaiveTriangulate(Face face, IModel model)
-        {
-            var vertCount = face.Vertices.Count;
-
-            if (vertCount < 3)
-                throw new ArgumentException($"Invalid face with vertex count of {vertCount}. A valid face must contain at least 3 vertices.");
-
-            // Sliding window of three, with increment of two
-            for (int i = 0; i < vertCount - 1; i += 2)
-            {
-                //TODO: Single responsibility; this function does vertex lookup too besides the triangulation.
-                yield return (
-                    A: model.Vertices.ElementAt(face.Vertices[i].VertexIndex - 1),
-                    B: model.Vertices.ElementAt(face.Vertices[i + 1].VertexIndex - 1),
-
-                    // Notice modulo: Index C overflows to index 0 at last step
-                    C: model.Vertices.ElementAt(face.Vertices[i + 2 % vertCount].VertexIndex - 1)
-                );
-            }
         }
 
         /// <summary>
         /// Calculates a simple face normal that is orthogonal to the face.
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected Vertex CalculateFaceNormal(Vertex a, Vertex b, Vertex c)
         {
-            var u = new Vector3(b.x - a.x, b.y - a.y, b.z - a.z); // a - b
-            var v = new Vector3(c.x - a.x, c.y - a.y, c.z - a.z); // c - a
+            var u = b - a;
+            var v = c - a;
 
-            // Cross product
-            return new Vertex(
-                x: (u.Y * v.Z) - (u.Z * v.Y),
-                y: (u.Z * v.X) - (u.X * v.Z),
-                z: (u.X * v.Y) - (u.Y * v.X)
-            );
+            return u.Cross(v);
         }
     }
 }

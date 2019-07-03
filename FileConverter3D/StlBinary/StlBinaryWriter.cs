@@ -4,11 +4,11 @@ using System.IO;
 
 namespace FileConverter3D.StlBinary
 {
-    class StlBinaryWriter : IFileWriter<StlTriangle>
+    class StlBinaryWriter : IDataWriter<byte[]>
     {
         protected const int HeaderLength = 80;
 
-        public void Write(IEnumerable<StlTriangle> stlTriangles, Stream destination)
+        public void Write(Stream destination, IEnumerable<byte[]> triangleData)
         {
             if (!destination.CanWrite)
                 throw new ArgumentException("Destination stream is not writeable.");
@@ -22,27 +22,17 @@ namespace FileConverter3D.StlBinary
                 // Write placeholder triangle count
                 bw.Write(default(int));
 
-                var triangleCount = 0;
-                foreach (var st in stlTriangles)
+                // Write triangles
+                uint triangleCount = 0;
+                foreach (var triangleBytes in triangleData)
                 {
+                    bw.Write(triangleBytes);
                     triangleCount++;
-                    WriteVertex(st.Normal);
-                    WriteVertex(st.A);
-                    WriteVertex(st.B);
-                    WriteVertex(st.C);
-                    bw.Write(default(ushort)); // Empty 2 byte
                 }
 
-                // Write actual triangle count
+                // Seek back and write actual triangle count
                 bw.Seek(HeaderLength, SeekOrigin.Begin);
                 bw.Write(triangleCount);
-
-                void WriteVertex(Vertex v)
-                {
-                    bw.Write(v.x);
-                    bw.Write(v.y);
-                    bw.Write(v.z);
-                }
             }
         }
     }
