@@ -1,4 +1,4 @@
-﻿namespace FileConverter3D.Common
+﻿namespace FileConverter3D.Core.Common
 {
     /// <summary>
     /// Facade class assuming the responsibility of coupling together file importer components.

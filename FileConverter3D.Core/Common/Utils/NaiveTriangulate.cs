@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using FileConverter3D.Core;
 
-namespace FileConverter3D.Common
+namespace FileConverter3D.Core.Common
 {
     /// <summary>
     /// Naive triangulation strategy.

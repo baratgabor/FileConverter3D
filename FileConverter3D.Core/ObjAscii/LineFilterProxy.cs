@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace FileConverter3D.ObjAscii
+namespace FileConverter3D.Core.ObjAscii
 {
     /// <summary>
     /// Filters out not supported lines early to improve parsing performance.

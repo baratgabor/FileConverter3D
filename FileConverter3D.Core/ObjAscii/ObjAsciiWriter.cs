@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace FileConverter3D.ObjAscii
+namespace FileConverter3D.Core.ObjAscii
 {
     public class ObjAsciiWriter : IDataWriter<string>
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace FileConverter3D.StlBinary
+namespace FileConverter3D.Core.StlBinary
 {
     public class TriangleSerializer : IValueSerializer<StlTriangle, byte[]>
     {

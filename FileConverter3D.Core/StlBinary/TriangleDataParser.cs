@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FileConverter3D.StlBinary
+namespace FileConverter3D.Core.StlBinary
 {
     /// <summary>
     /// Parses raw triangle data into IValue instances.

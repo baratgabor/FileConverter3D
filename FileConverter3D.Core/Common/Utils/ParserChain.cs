@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FileConverter3D.Common
+namespace FileConverter3D.Core.Common
 {
     /// <summary>
     /// Composite wrapper for value parsers. Finds and uses the first valid parser.

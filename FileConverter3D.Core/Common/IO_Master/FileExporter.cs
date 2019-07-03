@@ -1,4 +1,4 @@
-﻿namespace FileConverter3D.Common
+﻿namespace FileConverter3D.Core.Common
 {
     public class FileExporter<TRead, TSerialized> : IFileExporter
     {

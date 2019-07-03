@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace FileConverter3D.StlBinary
+namespace FileConverter3D.Core.StlBinary
 {
     public class StlBinaryWriter : IDataWriter<byte[]>
     {

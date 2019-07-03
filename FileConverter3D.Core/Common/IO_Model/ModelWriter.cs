@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace FileConverter3D.Common
+namespace FileConverter3D.Core.Common
 {
     /// <summary>
     /// Writes values into a new model.

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace FileConverter3D.StlBinary
+namespace FileConverter3D.Core.StlBinary
 {
     /// <summary>
     /// Extracts model data to create STL triangles.

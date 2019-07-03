@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace FileConverter3D.StlBinary
+namespace FileConverter3D.Core.StlBinary
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]

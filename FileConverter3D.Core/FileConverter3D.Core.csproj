@@ -41,19 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\IO_File\IFileStreamer.cs" />
+    <Compile Include="_Interfaces\IFileStreamer.cs" />
     <Compile Include="Common\IO_File\ReadingStream.cs" />
     <Compile Include="Common\IO_File\WritingStream.cs" />
     <Compile Include="Common\IO_Master\FileExporter.cs" />
     <Compile Include="Common\IO_Master\FileImporter.cs" />
-    <Compile Include="Common\IO_Master\IDataReader.cs" />
-    <Compile Include="Common\IO_Master\IDataWriter.cs" />
-    <Compile Include="Common\IO_Master\IFileExporter.cs" />
-    <Compile Include="Common\IO_Master\IFileImporter.cs" />
-    <Compile Include="Common\IO_Master\IValueParser.cs" />
-    <Compile Include="Common\IO_Master\IValueSerializer.cs" />
-    <Compile Include="Common\IO_Model\IModelReader.cs" />
-    <Compile Include="Common\IO_Model\IModelWriter.cs" />
+    <Compile Include="_Interfaces\IDataReader.cs" />
+    <Compile Include="_Interfaces\IDataWriter.cs" />
+    <Compile Include="_Interfaces\IFileExporter.cs" />
+    <Compile Include="_Interfaces\IFileImporter.cs" />
+    <Compile Include="_Interfaces\IValueParser.cs" />
+    <Compile Include="_Interfaces\IValueSerializer.cs" />
+    <Compile Include="_Interfaces\IModelReader.cs" />
+    <Compile Include="_Interfaces\IModelWriter.cs" />
     <Compile Include="Common\IO_Model\ModelReader.cs" />
     <Compile Include="Common\IO_Model\ModelWriter.cs" />
     <Compile Include="Common\Utils\FaceResolver.cs" />

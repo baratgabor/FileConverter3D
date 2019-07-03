@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FileConverter3D.ObjAscii
+namespace FileConverter3D.Core.ObjAscii
 {
     /// <summary>
     /// Intercepts faces, checks if they are negatively indexed, and converts them to positive indexing.

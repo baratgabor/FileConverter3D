@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace FileConverter3D.Common
+namespace FileConverter3D.Core.Common
 {
     /// <summary>
     /// Simple adapter to File.Open() in file creation mode.

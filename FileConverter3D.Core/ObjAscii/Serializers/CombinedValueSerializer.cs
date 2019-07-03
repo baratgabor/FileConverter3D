@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FileConverter3D.ObjAscii
+namespace FileConverter3D.Core.ObjAscii
 {
     public class CombinedValueSerializer : IValueSerializer<IValue, string>
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace FileConverter3D
+namespace FileConverter3D.Core
 {
     //TODO: Obsolete. Implemented resolve functionality directly in model. In fact, assuming that vertices.ElementAt() will cast to a List and use the indexer is incorrect, because there can be yielding decorators implemented over the model.
     [Obsolete("Obsolete.Implemented resolve functionality directly in model.")]

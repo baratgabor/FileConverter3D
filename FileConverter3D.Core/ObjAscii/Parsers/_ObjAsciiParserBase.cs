@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace FileConverter3D
+namespace FileConverter3D.Core
 {
     //TODO: Heavy use of Split(); implementations are too allocation heavy.
     public abstract class ObjAsciiParserBase : IValueParser<string>

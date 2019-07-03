@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace FileConverter3D.Common
+namespace FileConverter3D.Core.Common
 {
     /// <summary>
     /// Enumerates the entire model content as IValue instances.
