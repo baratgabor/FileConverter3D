@@ -71,6 +71,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileConverter3D.Core\FileConverter3D.Core.csproj">
+      <Project>{e2b982ce-f543-483d-a417-2f70c6d9eb5f}</Project>
+      <Name>FileConverter3D.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileConverter3D.ModelProcessing\FileConverter3D.ModelProcessing.csproj">
+      <Project>{8ffa6f04-8149-4ffc-91a1-f2101dbfd627}</Project>
+      <Name>FileConverter3D.ModelProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileConverter3D.Model\FileConverter3D.Model.csproj">
+      <Project>{12e9ded0-6f7a-4082-8a27-9305b4df8719}</Project>
+      <Name>FileConverter3D.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileConverter3D\FileConverter3D.csproj">
       <Project>{80cf0dff-74c2-4985-83d7-c4924cd70b60}</Project>
       <Name>FileConverter3D</Name>

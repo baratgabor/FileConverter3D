@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace FileConverter3D
 {
-    class ModelVolumeCalculator : IModelCalculation<float>
+    public class ModelVolumeCalculator : IModelCalculation<float>
     {
         ITriangulator _triangulator;
 

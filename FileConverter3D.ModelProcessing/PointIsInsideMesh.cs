@@ -7,7 +7,7 @@ namespace FileConverter3D
     /// Checks if a point is inside the specified 3D mesh.
     /// Assumes a closed mesh.
     /// </summary>
-    class PointIsInsideMesh : IModelCalculation<bool>
+    public class PointIsInsideMesh : IModelCalculation<bool>
     {
         private const double EPSILON = 0.0000001;
         private readonly ITriangulator _triangulator;

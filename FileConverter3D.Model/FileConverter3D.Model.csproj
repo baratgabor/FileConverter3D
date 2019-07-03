@@ -46,6 +46,7 @@
     <Compile Include="Implementations\Face.cs" />
     <Compile Include="Implementations\FaceVertex.cs" />
     <Compile Include="Implementations\Vector2.cs" />
+    <Compile Include="Interfaces\IValueVisitor.cs" />
     <Compile Include="Interfaces\IVector2.cs" />
     <Compile Include="Interfaces\IVector3.cs" />
     <Compile Include="Implementations\Model.cs" />

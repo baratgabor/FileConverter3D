@@ -41,47 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\IO_Model\ModelReader.cs" />
-    <Compile Include="Common\Utils\FaceResolver.cs" />
-    <Compile Include="Common\IO_Master\IValueSerializer.cs" />
-    <Compile Include="ObjAscii\Serializers\CombinedValueSerializer.cs" />
-    <Compile Include="Common\Utils\NaiveTriangulate.cs" />
-    <Compile Include="Common\Utils\ITriangulator.cs" />
-    <Compile Include="StlBinary\TriangleSerializer.cs" />
-    <Compile Include="ObjAscii\ModelWriterDecorator_FaceIndexCorrection.cs" />
-    <Compile Include="Common\IO_Master\FileExporter.cs" />
-    <Compile Include="Common\IO_Model\IModelReader.cs" />
-    <Compile Include="Common\IO_File\WritingStream.cs" />
-    <Compile Include="Common\IO_Master\IDataWriter.cs" />
-    <Compile Include="ObjAscii\ObjAsciiWriter.cs" />
-    <Compile Include="StlBinary\TriangleExtractor.cs" />
-    <Compile Include="StlBinary\StlBinaryWriter.cs" />
-    <Compile Include="StlBinary\StlTriangle.cs" />
     <Compile Include="FileConverter3D.cs" />
-    <Compile Include="Common\IO_File\ReadingStream.cs" />
-    <Compile Include="Common\IO_File\IFileStreamer.cs" />
-    <Compile Include="Common\IO_Model\IModelWriter.cs" />
-    <Compile Include="ObjAscii\Parsers\FaceParser.cs" />
-    <Compile Include="ObjAscii\Parsers\NormalParser.cs" />
-    <Compile Include="ObjAscii\Parsers\_ObjAsciiParserBase.cs" />
-    <Compile Include="ObjAscii\Parsers\TextureCoordParser.cs" />
-    <Compile Include="ObjAscii\Parsers\VertexParser.cs" />
-    <Compile Include="Common\IO_Master\FileImporter.cs" />
-    <Compile Include="Common\IO_Model\IValueVisitor.cs" />
-    <Compile Include="Common\IO_Master\IValueParser.cs" />
-    <Compile Include="Common\IO_Master\IDataReader.cs" />
-    <Compile Include="Common\IO_Model\ModelWriter.cs" />
-    <Compile Include="Common\IO_Master\IFileImporter.cs" />
-    <Compile Include="Common\IO_Master\IFileExporter.cs" />
-    <Compile Include="ObjAscii\LineFilterProxy.cs" />
-    <Compile Include="Common\Utils\ParserChain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\Utils\TextLineReader.cs" />
-    <Compile Include="StlBinary\TriangleDataParser.cs" />
-    <Compile Include="StlBinary\TriangleDataReader.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\FileConverter3D.Core\FileConverter3D.Core.csproj">
+      <Project>{e2b982ce-f543-483d-a417-2f70c6d9eb5f}</Project>
+      <Name>FileConverter3D.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileConverter3D.ModelProcessing\FileConverter3D.ModelProcessing.csproj">
+      <Project>{8ffa6f04-8149-4ffc-91a1-f2101dbfd627}</Project>
+      <Name>FileConverter3D.ModelProcessing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileConverter3D.Model\FileConverter3D.Model.csproj">
       <Project>{12e9ded0-6f7a-4082-8a27-9305b4df8719}</Project>
       <Name>FileConverter3D.Model</Name>

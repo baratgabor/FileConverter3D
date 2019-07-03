@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace FileConverter3D
 {
-    class ModelSurfaceAreaCalculator : IModelCalculation<float>
+    public class ModelSurfaceAreaCalculator : IModelCalculation<float>
     {
         protected ITriangulator _triangulator;
 

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 namespace FileConverter3D
 {
-    class ModelTransformationDecorator : IModel
+    public class ModelTransformationDecorator : IModel
     {
         protected IModel _model;
 
-        protected Matrix4x4 _matrixScale;
-        protected Matrix4x4 _matrixRotate;
-        protected Matrix4x4 _matrixTranslate;
+        private protected Matrix4x4 _matrixScale;
+        private protected Matrix4x4 _matrixRotate;
+        private protected Matrix4x4 _matrixTranslate;
 
-        protected Matrix4x4 _matrixMaster;
-        protected bool _rebuildMaster;
+        private protected Matrix4x4 _matrixMaster;
+        private protected bool _rebuildMaster;
 
         public IEnumerable<Vertex> Vertices => TransformVertices(_model.Vertices);
 

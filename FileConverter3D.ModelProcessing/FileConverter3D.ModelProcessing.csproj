@@ -51,6 +51,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileConverter3D.Core\FileConverter3D.Core.csproj">
+      <Project>{e2b982ce-f543-483d-a417-2f70c6d9eb5f}</Project>
+      <Name>FileConverter3D.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileConverter3D.Model\FileConverter3D.Model.csproj">
       <Project>{12e9ded0-6f7a-4082-8a27-9305b4df8719}</Project>
       <Name>FileConverter3D.Model</Name>

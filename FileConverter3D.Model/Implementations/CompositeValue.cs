@@ -2,7 +2,7 @@
 
 namespace FileConverter3D
 {
-    class CompositeValue : IValue
+    public class CompositeValue : IValue
     {
         public List<IValue> Values;
 
