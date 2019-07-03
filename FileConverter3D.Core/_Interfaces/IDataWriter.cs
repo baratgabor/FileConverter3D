@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace FileConverter3D
+namespace FileConverter3D.Core
 {
     public interface IDataWriter<TData>
     {

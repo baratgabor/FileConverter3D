@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FileConverter3D
+namespace FileConverter3D.Core
 {
     /// <summary>
     /// Parses the specified input type into the specified output type.

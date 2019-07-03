@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace FileConverter3D
+namespace FileConverter3D.Core
 {
     /// <summary>
     /// Exposes file content at a given path as a Stream.
