@@ -33,7 +33,7 @@ var objImporter =
             new Common.ModelWriter(() => new Model())))
 ```
 
-And the actual import process happens in a reusable FileImporter<T> facade class the following way:
+And the actual import process happens in a reusable `FileImporter<T>` facade class the following way:
 
 ```csharp
      public IModel Import(string filePath) => 
