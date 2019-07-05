@@ -15,7 +15,7 @@ namespace FileConverter3D.UnitTests
             var testLines = new List<string>() { "dsfpok pokdvpoe", "ds949 99 3kj", "d0 m04k 04kd",  "fps vmrp 948 894"};
 
             var resultLines =
-                new Common.TextLineReader().Read(
+                new Core.Common.TextLineReader().Read(
                     GenerateStreamFromString(
                         string.Join(
                             Environment.NewLine,

@@ -7,17 +7,19 @@ namespace FileConverter3D
     /// </summary>
     public class Face : IValue
     {
-        public List<FaceVertex> Vertices = new List<FaceVertex>();
+        public IList<FaceVertex> Vertices => _vertices;
         public bool IsTriangle => Vertices.Count == 3;
         public bool IsQuad => Vertices.Count == 4;
+
+        protected List<FaceVertex> _vertices = new List<FaceVertex>();
 
         public Face() { }
 
         public Face(params FaceVertex[] faceVertices)
-            => Vertices.AddRange(faceVertices);
+            => _vertices.AddRange(faceVertices);
 
         public void AddFaceVertex(FaceVertex vertex)
-            => Vertices.Add(vertex);
+            => _vertices.Add(vertex);
 
         public void Accept(IValueVisitor visitor)
             => visitor.Visit(this);
@@ -27,11 +29,11 @@ namespace FileConverter3D
             if (!(obj is Face other))
                 return false;
 
-            if (Vertices.Count != other.Vertices.Count)
+            if (_vertices.Count != other._vertices.Count)
                 return false;
 
-            for (int i = 0; i < Vertices.Count; i++)
-                if (Vertices[i] != other.Vertices[i])
+            for (int i = 0; i < _vertices.Count; i++)
+                if (_vertices[i] != other._vertices[i])
                     return false;
 
             return true;

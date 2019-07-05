@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FileConverter3D.Core.ObjAscii;
 
 namespace FileConverter3D.UnitTests
 {
@@ -16,7 +13,7 @@ namespace FileConverter3D.UnitTests
         [TestCase("v -1.456 -2.456 -3.255")]
         public void CanParse_ValidString_ShouldReturnTrue(string parsable)
         {
-            Assert.IsTrue(new ObjAscii.VertexParser().CanParse(parsable));
+            Assert.IsTrue(new VertexParser().CanParse(parsable));
         }
 
         [TestCase("v 0 0 0", 0, 0, 0)]
@@ -26,7 +23,7 @@ namespace FileConverter3D.UnitTests
         public void Parse_ValidString_ShouldReturnCorrectVertex(string parsable, float expX, float expY, float expZ)
         {
             var expectedVertex = new Vertex(expX, expY, expZ);
-            Assert.AreEqual(new ObjAscii.VertexParser().Parse(parsable), expectedVertex);
+            Assert.AreEqual(new VertexParser().Parse(parsable), expectedVertex);
         }
 
         [TestCase(null)]
@@ -34,7 +31,7 @@ namespace FileConverter3D.UnitTests
         [TestCase("x 1 2 3")]
         public void CanParse_InvalidString_ShouldReturnFalse(string parsable)
         {
-            Assert.IsFalse(new ObjAscii.VertexParser().CanParse(parsable));
+            Assert.IsFalse(new Core.ObjAscii.VertexParser().CanParse(parsable));
         }
 
         [TestCase("")]
@@ -45,7 +42,7 @@ namespace FileConverter3D.UnitTests
         [TestCase("v 1,4 2,4 3,2")]
         public void Parse_InvalidString_ShouldThrow(string parsable)
         {
-            Assert.Throws<ArgumentException>(() => new ObjAscii.VertexParser().Parse(parsable));
+            Assert.Throws<ArgumentException>(() => new VertexParser().Parse(parsable));
         }
     }
 }

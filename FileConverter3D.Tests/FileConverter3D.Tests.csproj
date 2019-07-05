@@ -62,10 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\ObjAsciiImporterFactory_Tests.cs" />
-    <Compile Include="TextLineReader_Tests.cs" />
+    <Compile Include="UnitTests\Core.Common\TextLineReader_Tests.cs" />
     <Compile Include="Vector3_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTests\ObjAscii\VertexParser_Tests.cs" />
+    <Compile Include="UnitTests\Core.ObjAscii\VertexParser_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -87,6 +87,9 @@
       <Project>{80cf0dff-74c2-4985-83d7-c4924cd70b60}</Project>
       <Name>FileConverter3D</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UnitTests\Core.StlBinary\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
