@@ -49,7 +49,7 @@ And the actual import process happens in a reusable `FileImporter<T>` facade cla
 
 # Usage
 
-Currently the functionality is exposed in an easy to consume way, through static methods in the `FileConverter3D` class. This static class serves as the composition root of the converter graph.
+Currently the functionality is exposed in an easy to consume way, through static methods in the `FileConverter3D` class. This static class serves as the composition root of the converter graph. No other parts of the code contain references to concrete implementations; besides the model structs/classes which are considered data containers.
 
 Example:
 
