@@ -6,7 +6,7 @@ Currently can read/write ASCII Obj and binary STL.
 
 Has transformation matrix based mesh transformation capability that doesn't have any external dependencies.
 
-Not really optimized, besides "don't be an idiot" sort of basic sensibilities.
+Not really optimized, besides "don't be an idiot" sort of basic concerns.
 
 (I think this structure makes it feasible to implement direct transcoding with a sliding window (without loading the full model into memory). It could still support transformations too, since a transformation decorator could be used on top of the vertex and normal stream. I might look into this later.)
 
