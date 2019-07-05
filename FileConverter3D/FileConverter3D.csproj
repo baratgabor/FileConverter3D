@@ -44,9 +44,7 @@
     <Compile Include="FileConverter3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\FileConverter3D.Core\FileConverter3D.Core.csproj">
       <Project>{e2b982ce-f543-483d-a417-2f70c6d9eb5f}</Project>
