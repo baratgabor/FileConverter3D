@@ -4,6 +4,8 @@ Extensible, loosely coupled file converter scaffolding that is (hopefully) reusa
 
 Currently can read/write ASCII Obj and binary STL.
 
+Has transformation matrix based mesh transformation capability that doesn't have any external dependencies.
+
 # Current status
 
 Under development, but working/functional. The basic structure is semi-solid already, so I'll start adding tests soon.
