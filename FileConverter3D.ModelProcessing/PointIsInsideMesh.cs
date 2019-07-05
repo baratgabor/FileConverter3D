@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FileConverter3D.Core;
 
 namespace FileConverter3D
 {

@@ -97,31 +97,12 @@ namespace FileConverter3D
 
         public static class Transform
         {
-            public static IModel Translate(IModel model, IVector3 translation)
-            {
-                var transModel = GetTransformableModel(model);
-                transModel.SetTranslation(translation);
-                return transModel;
-            }
-
-            public static IModel Rotate(IModel model, IVector3 eulers)
-            {
-                var transModel = GetTransformableModel(model);
-                transModel.SetRotation(eulers);
-                return transModel;
-            }
-
-            public static IModel Scale(IModel model, IVector3 scale)
-            {
-                var transModel = GetTransformableModel(model);
-                transModel.SetScale(scale);
-                return transModel;
-            }
-
-            private static ITransformableModel GetTransformableModel(IModel model)
-                => model is ITransformableModel ? 
-                    model as ITransformableModel : 
-                    new ModelTransformationDecorator(model);
+            /// <summary>
+            /// Returns model transformation instance for setting and applying transformations on a model. 
+            /// </summary>
+            public static IModelTransform GetModelTransform()
+                => new ModelMatrixTransform(
+                    matrixFactory: () => new Matrix4x4());
         }
 
         public static class Analyze

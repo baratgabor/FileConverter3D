@@ -4,6 +4,6 @@ namespace FileConverter3D
 {
     public interface IVertexSource
     {
-        IEnumerable<Vertex> Vertices { get; }
+        IList<Vertex> Vertices { get; }
     }
 }

@@ -4,6 +4,6 @@ namespace FileConverter3D
 {
     public interface IFaceSource
     {
-        IEnumerable<Face> Faces { get; }
+        IList<Face> Faces { get; }
     }
 }

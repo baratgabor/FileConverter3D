@@ -5,10 +5,10 @@ namespace FileConverter3D
 {
     public class Model : IModel
     {
-        public IEnumerable<Vertex> Vertices => _vertices;
-        public IEnumerable<Normal> Normals => _normals;
-        public IEnumerable<TextureCoord> TextureCoords => _textureCoords;
-        public IEnumerable<Face> Faces => _faces;
+        public IList<Vertex> Vertices => _vertices;
+        public IList<Normal> Normals => _normals;
+        public IList<TextureCoord> TextureCoords => _textureCoords;
+        public IList<Face> Faces => _faces;
 
         private readonly List<Vertex> _vertices = new List<Vertex>();
         private readonly List<Normal> _normals = new List<Normal>();

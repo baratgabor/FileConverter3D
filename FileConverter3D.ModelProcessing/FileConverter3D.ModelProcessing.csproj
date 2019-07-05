@@ -44,10 +44,10 @@
     <Compile Include="IModelCalculation.cs" />
     <Compile Include="IModelTransformation.cs" />
     <Compile Include="Matrix\IMatrix.cs" />
+    <Compile Include="Matrix\IModelTransform.cs" />
     <Compile Include="Matrix\Matrix4x4.cs" />
-    <Compile Include="Matrix\TRSMatrix.cs" />
+    <Compile Include="Matrix\ModelTransform.cs" />
     <Compile Include="ModelSurfaceAreaCalculator.cs" />
-    <Compile Include="ModelTransformationDecorator.cs" />
     <Compile Include="ModelVolumeCalculator.cs" />
     <Compile Include="PointIsInsideMesh.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

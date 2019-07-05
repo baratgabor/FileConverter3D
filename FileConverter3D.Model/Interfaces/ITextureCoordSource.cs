@@ -4,6 +4,6 @@ namespace FileConverter3D
 {
     public interface ITextureCoordSource
     {
-        IEnumerable<TextureCoord> TextureCoords { get; }
+        IList<TextureCoord> TextureCoords { get; }
     }
 }
