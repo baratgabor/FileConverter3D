@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FileConverter3D.ModelProcessing\FileConverter3D.ModelProcessing.csproj">
+      <Project>{8FFA6F04-8149-4FFC-91A1-F2101DBFD627}</Project>
+      <Name>FileConverter3D.ModelProcessing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileConverter3D.Model\FileConverter3D.Model.csproj">
       <Project>{12e9ded0-6f7a-4082-8a27-9305b4df8719}</Project>
       <Name>FileConverter3D.Model</Name>
