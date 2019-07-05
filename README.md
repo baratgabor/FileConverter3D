@@ -8,7 +8,7 @@ Has transformation matrix based mesh transformation capability that doesn't have
 
 Not really optimized, besides "don't be an idiot" sort of basic sensibilities.
 
-(I think this structure makes it feasible to implement direct transcoding with a sliding window (without loading the full model into memory). I might look into this later.)
+(I think this structure makes it feasible to implement direct transcoding with a sliding window (without loading the full model into memory). It could still support transformations too, since a transformation decorator could be used on top of the vertex and normal stream. I might look into this later.)
 
 # Current status
 
