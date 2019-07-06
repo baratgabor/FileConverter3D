@@ -12,7 +12,7 @@ Not really optimized, besides "don't be an idiot" sort of basic concerns.
 
 # Current status
 
-Under development, but working/functional. The basic structure is semi-solid already, so I'll start adding tests soon.
+Unstable, under development, but working/functional. The basic structure is semi-solid already, so I'll start adding tests soon.
 
 # Who's this useful for
 
