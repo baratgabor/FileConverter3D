@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace FileConverter3D.Console
@@ -9,6 +10,11 @@ namespace FileConverter3D.Console
         public int ArgumentCount { get; } = 2;
 
         private ConverterState _state;
+        private Dictionary<string, Func<string, IModel>> _typeMap = new Dictionary<string, Func<string, IModel>>()
+        {
+            ["objascii"] = (string path) => FileConverter3D.Import.ObjAscii(path),
+            ["stlbinary"] = (string path) => FileConverter3D.Import.StlBinary(path),
+        };
 
         public ImportOperation(ConverterState state) => _state = state;
 
@@ -20,18 +26,16 @@ namespace FileConverter3D.Console
             var importType = args[0];
             var path = args[1];
 
-            Action cmd = default;
-            if (String.Equals(importType, "objascii", StringComparison.OrdinalIgnoreCase))
-                cmd = () => _state.Model = FileConverter3D.Import.ObjAscii(path);
-            else if (String.Equals(importType, "stlbinary", StringComparison.OrdinalIgnoreCase))
-                cmd = () => _state.Model = FileConverter3D.Import.StlBinary(path);
-            else
-                throw new ArgumentException("Invalid import type. Supported types: objascii, stlbinary");
+            if (!_typeMap.TryGetValue(importType, out var cmd))
+                throw new ArgumentException($"Invalid {OptionName} type '{importType}'. Supported types: {String.Join(", ", _typeMap.Keys)}");
 
             if (!File.Exists(path))
-                throw new ArgumentException($"The specified file doesn't exist or inaccessible.");
+                throw new ArgumentException($"The specified file ('{path}') doesn't exist or inaccessible.");
 
-            return new RelayCommandConsoleConcurrent(OptionName, () => (true, ""), cmd);
+            return new RelayCommandConsoleConcurrent(
+                OptionName,
+                () => (true, ""),
+                () => _state.Model = cmd(path));
         }
     }
 }

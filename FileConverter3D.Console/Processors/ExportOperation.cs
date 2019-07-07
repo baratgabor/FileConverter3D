@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
@@ -11,6 +12,11 @@ namespace FileConverter3D.Console
         public int ArgumentCount { get; } = 2;
 
         private ConverterState _state;
+        private Dictionary<string, Action<IModel, string>> _typeMap = new Dictionary<string, Action<IModel, string>>()
+        {
+            ["objascii"] = (IModel model, string path) => FileConverter3D.Export.ObjAscii(model, path),
+            ["stlbinary"] = (IModel model, string path) => FileConverter3D.Export.StlBinary(model, path),
+        };
 
         public ExportOperation(ConverterState state)
         {
@@ -24,11 +30,8 @@ namespace FileConverter3D.Console
 
             ValidateFilePath(path);
 
-            Action cmd = default;
-            if (String.Equals(exportType, "objascii", StringComparison.OrdinalIgnoreCase))
-                cmd = () => FileConverter3D.Export.ObjAscii(_state.Model, path);
-            else if (String.Equals(exportType, "stlbinary", StringComparison.OrdinalIgnoreCase))
-                cmd = () => FileConverter3D.Export.StlBinary(_state.Model, path);
+            if (!_typeMap.TryGetValue(exportType, out var cmd))
+                throw new ArgumentException($"Invalid {OptionName} type '{exportType}'. Supported types: {String.Join(", ", _typeMap.Keys)}");
 
             return new CompositeCommand(
                 // Command for applying transformations, if any set
@@ -46,8 +49,8 @@ namespace FileConverter3D.Console
                 new RelayCommandConsoleConcurrent(
                     OptionName,
                     () => _state.Model == null ? (false, "A model must be loaded for export operation.") : (true, ""),
-                    cmd)
-            );
+                    () => cmd(_state.Model, path)
+            ));
         }
 
         public void ValidateFilePath(string path)
