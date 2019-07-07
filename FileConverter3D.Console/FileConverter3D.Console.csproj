@@ -43,8 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CompositeCommand.cs" />
+    <Compile Include="Processors\ExportOperation.cs" />
+    <Compile Include="Interfaces\ICommandAsync.cs" />
+    <Compile Include="Interfaces\IInputProcessor.cs" />
+    <Compile Include="Processors\ImportOperation.cs" />
+    <Compile Include="Commands\RelayCommandConcurrent.cs" />
+    <Compile Include="Processors\RotateOperation.cs" />
+    <Compile Include="Processors\ScaleOperation.cs" />
+    <Compile Include="Processors\TranslateOperation.cs" />
+    <Compile Include="Processors\_VectorTransformOperation.cs" />
+    <Compile Include="ConverterState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

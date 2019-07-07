@@ -1,5 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FileConverter3D.Console
 {
@@ -7,36 +10,38 @@ namespace FileConverter3D.Console
     {
         static void Main(string[] args)
         {
-            //var source = @"C:\Users\barat\Desktop\3D Mesh Sample Files\StanfordBunnyTriangulated.obj";
-            //var source = @"C:\Users\barat\Desktop\3D Mesh Sample Files\maya.obj";
-            //var source = @"C:\Users\barat\Desktop\testCopy.stl";
+            MainAsync().Wait();
+        }
 
-            var source = @"C:\Users\barat\Desktop\3D Mesh Sample Files\maya.obj";
-            var target = @"C:\Users\barat\Desktop\test";
+        static async Task MainAsync()
+        {
+            var state = new ConverterState();
+            var r = new Runner(
+                new IInputProcessor[] {
+                    new ImportOperation(state),
+                    new ExportOperation(state),
+                    new RotateOperation(state),
+                    new ScaleOperation(state),
+                    new TranslateOperation(state)
+                });
 
-            var model = FileConverter3D.Import.ObjAscii(source);
+            System.Console.WriteLine("FileConverter3D started in interactive mode. Please enter operations.");
+            System.Console.WriteLine();
 
-            Debug.WriteLine("Model surface area: " + FileConverter3D.Analyze.CalculateSurfaceArea(model));
-            Debug.WriteLine("Model volume: " + FileConverter3D.Analyze.CalculateVolume(model));
-            Debug.WriteLine("Is point in mesh: " + FileConverter3D.Analyze.Intersect(model, new Vector3(-0.4f,0,0)));
+            string line;
+            while (!string.IsNullOrEmpty(line = System.Console.ReadLine()))
+            {
+                var inputs = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            FileConverter3D.Transform.GetModelTransform()
-                .AddScale(2, 2, 2)
-                .AddTranslation(5, 10, 0)
-                .AddRotation(47, 72, 18)
-                .Apply(model);
-
-            Debug.WriteLine("Model surface area: " + FileConverter3D.Analyze.CalculateSurfaceArea(model));
-            Debug.WriteLine("Model volume: " + FileConverter3D.Analyze.CalculateVolume(model));
-            Debug.WriteLine("Is point in mesh: " + FileConverter3D.Analyze.Intersect(model, new Vector3(-0.4f, 0, 0)));
-
-            if (File.Exists(target + ".obj"))
-                File.Delete(target + ".obj");
-            FileConverter3D.Export.ObjAscii(model, target + ".obj");
-
-            if (File.Exists(target + ".stl"))
-                File.Delete(target + ".stl");
-            FileConverter3D.Export.StlBinary(model, target + ".stl");
+                try
+                {
+                    await r.Run(inputs);
+                }
+                catch (Exception e)
+                {
+                    System.Console.WriteLine("At least one operation faulted: " + e.Message);
+                }
+            }
         }
     }
 }
