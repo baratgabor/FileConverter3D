@@ -17,13 +17,13 @@ namespace FileConverter3D.Console
         {
             var state = new ConverterState();
             var r = new Runner(
-                new IInputProcessor[] {
-                    new ImportOperation(state),
-                    new ExportOperation(state),
-                    new RotateOperation(state),
-                    new ScaleOperation(state),
-                    new TranslateOperation(state)
-                });
+                new ImportOperation(state),
+                new ExportOperation(state),
+                new RotateOperation(state),
+                new ScaleOperation(state),
+                new TranslateOperation(state),
+                new OverwriteSwitch(state)
+            );
 
             System.Console.WriteLine("FileConverter3D started in interactive mode. Please enter operations.");
             System.Console.WriteLine();
@@ -31,7 +31,7 @@ namespace FileConverter3D.Console
             string line;
             while (!string.IsNullOrEmpty(line = System.Console.ReadLine()))
             {
-                var inputs = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var inputs = RemoveNewLines(line).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 try
                 {
@@ -42,6 +42,14 @@ namespace FileConverter3D.Console
                     System.Console.WriteLine("At least one operation faulted: " + e.Message);
                 }
             }
+        }
+
+        private static string RemoveNewLines(string s)
+        {
+            s = s.Replace("\n", String.Empty);
+            s = s.Replace("\r", String.Empty);
+            s = s.Replace("\t", String.Empty);
+            return s;
         }
     }
 }

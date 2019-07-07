@@ -49,7 +49,10 @@ namespace FileConverter3D.Console
                 new RelayCommandConsoleConcurrent(
                     OptionName,
                     () => _state.Model == null ? (false, "A model must be loaded for export operation.") : (true, ""),
-                    () => cmd(_state.Model, path)
+                    () => {
+                        if (_state.OverwriteMode && File.Exists(path))
+                            File.Delete(path);
+                        cmd(_state.Model, path); }
             ));
         }
 
@@ -67,8 +70,8 @@ namespace FileConverter3D.Console
                 throw new ArgumentException("Cannot extract directory or file name from path", e);
             }
 
-            if (File.Exists(path))
-                throw new ArgumentException("The specified file already exists.");
+            if (!_state.OverwriteMode && File.Exists(path))
+                throw new ArgumentException($"The specified file ('{path}') already exists. Use 'overwritemode' to allow overwriting existing files.");
 
             if (!HaveWritePermToDir(dir))
                 throw new ArgumentException("This process has no write privilige to the specified folder.");

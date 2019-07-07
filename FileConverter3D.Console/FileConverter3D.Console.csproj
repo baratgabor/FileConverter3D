@@ -48,7 +48,8 @@
     <Compile Include="Interfaces\ICommandAsync.cs" />
     <Compile Include="Interfaces\IInputProcessor.cs" />
     <Compile Include="Processors\ImportOperation.cs" />
-    <Compile Include="Commands\RelayCommandConcurrent.cs" />
+    <Compile Include="Commands\RelayCommandConsoleConcurrent.cs" />
+    <Compile Include="Processors\OverwriteSwitch.cs" />
     <Compile Include="Processors\RotateOperation.cs" />
     <Compile Include="Processors\ScaleOperation.cs" />
     <Compile Include="Processors\TranslateOperation.cs" />

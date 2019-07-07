@@ -9,7 +9,7 @@ namespace FileConverter3D.Console
     {
         private IInputProcessor[] _processors;
 
-        public Runner(IInputProcessor[] processors) => _processors = processors;
+        public Runner(params IInputProcessor[] processors) => _processors = processors;
 
         public async Task Run(string[] inputs)
         {
@@ -25,10 +25,10 @@ namespace FileConverter3D.Console
 
             foreach (var c in commands)
             {
-                var canExecute = c.CanExecute();
-                if (!canExecute.result)
+                var (canExecute, failReason) = c.CanExecute();
+                if (!canExecute)
                 {
-                    System.Console.WriteLine("Operation cannot execute under current state. Reason: " + canExecute.failReason);
+                    System.Console.WriteLine("Operation cannot execute under current state. Reason: " + failReason);
                     continue;
                 }
 
