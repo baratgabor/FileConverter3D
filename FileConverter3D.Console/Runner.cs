@@ -17,11 +17,9 @@ namespace FileConverter3D.Console
 
             if (!commands.Any())
             {
-                System.Console.WriteLine("No supported operations specified.");
+                System.Console.WriteLine("No supported operation is recognized in input.");
                 return;
             }
-
-            System.Console.WriteLine($"Operations successfully added: {commands.Count}.");
 
             foreach (var c in commands)
             {
@@ -36,9 +34,10 @@ namespace FileConverter3D.Console
                 {
                     await c.ExecuteAsync();
                 }
-                catch (AggregateException ae)
+                catch (Exception e)
                 {
-                    System.Console.WriteLine("Execution failed: " + ae.InnerExceptions.First().Message);
+                    var msg = e is AggregateException ae ? ae.InnerException.Message : e.Message;
+                    System.Console.WriteLine("Operation failed: " + msg);
                 }
             }
         }

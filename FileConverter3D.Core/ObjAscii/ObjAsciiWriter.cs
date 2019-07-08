@@ -6,7 +6,7 @@ namespace FileConverter3D.Core.ObjAscii
 {
     public class ObjAsciiWriter : IDataWriter<string>
     {
-        protected const string Header = "# Produced by Leaky.FileConverter3D";
+        protected const string Header = "# Produced by Leaky.FileConverter3D: https://github.com/baratgabor/FileConverter3D";
 
         public void Write(Stream destination, IEnumerable<string> data)
         {

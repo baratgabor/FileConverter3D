@@ -22,8 +22,6 @@ namespace FileConverter3D.Console
                 await InteractiveExecutorAsync();
             else
                 await SingleLineExecutorAsync(args);
-
-            System.Console.ReadKey();
         }
 
         private static void Initialize()

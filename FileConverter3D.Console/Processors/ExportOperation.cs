@@ -36,7 +36,7 @@ namespace FileConverter3D.Console
             return new CompositeCommand(
                 // Command for applying transformations, if any set
                 new RelayCommandConsoleConcurrent(
-                    "apply prior transformations",
+                    "apply prior transformations (if any)",
                     () => (true, ""), 
                     () => {
                         if (_state.ModelTransform != null && _state.Model != null)
