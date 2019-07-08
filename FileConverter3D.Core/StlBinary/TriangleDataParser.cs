@@ -16,7 +16,7 @@ namespace FileConverter3D.Core.StlBinary
 
         public IEnumerable<IValue> Parse(IEnumerable<byte[]> parsables)
         {
-            _vertIndx = _normIndx = 1;
+            _vertIndx = _normIndx = 0;
 
             foreach (var p in parsables)
                 yield return Parse(p);
