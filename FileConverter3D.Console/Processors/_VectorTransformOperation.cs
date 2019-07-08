@@ -23,7 +23,8 @@
                         _state.ModelTransform = new ModelMatrixTransform(() => new Matrix4x4());
 
                     AddTransform(_state.ModelTransform, vec);
-                });
+                },
+                executeSynced: true);
         }
 
         public (float x, float y, float z) ParseVector(string strX, string strY, string strZ)

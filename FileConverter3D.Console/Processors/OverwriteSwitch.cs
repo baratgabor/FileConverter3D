@@ -14,6 +14,7 @@
             => new RelayCommandConsoleConcurrent(
                 "activate overwrite mode",
                 () => (true, ""),
-                () => _state.OverwriteMode = true);
+                () => _state.OverwriteMode = true,
+                executeSynced: true);
     }
 }
