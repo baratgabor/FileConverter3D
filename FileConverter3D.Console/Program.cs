@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FileConverter3D.Console
@@ -57,7 +58,7 @@ namespace FileConverter3D.Console
 
                 System.Console.WriteLine();
 
-                await SingleLineExecutorAsync(SplitInput(cmdLine));
+                await SingleLineExecutorAsync(SplitInput(cmdLine).ToArray());
             }
         }
 
@@ -73,17 +74,48 @@ namespace FileConverter3D.Console
             }
         }
 
-        private static string[] SplitInput(string input)
+        private static IEnumerable<string> SplitInput(string input)
         {
-            return RemoveNewLines(input).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        }
+            input = RemoveNewLines(input);
+            bool inQuote = false;
+            bool inSpace = false;
+            int segmentStart = 0;
 
-        private static string RemoveNewLines(string s)
-        {
-            s = s.Replace("\n", String.Empty);
-            s = s.Replace("\r", String.Empty);
-            s = s.Replace("\t", String.Empty);
-            return s;
+            for (int i = 0, len = input.Length; i < len; i++)
+            {
+                char c = input[i];
+
+                if (c == '"') inQuote = !inQuote;
+
+                if (!inQuote && c == ' ')
+                {
+                    if (!inSpace)
+                        yield return CleanSubstr(input, segmentStart, i);
+                    segmentStart = i + 1;
+                    inSpace = true;
+                }
+                else
+                    inSpace = false;
+            }
+
+            if(segmentStart < input.Length)
+                yield return CleanSubstr(input, segmentStart, input.Length);
+
+            string CleanSubstr(string value, int startPos, int endPos)
+            {
+                while (value[endPos - 1] == '"' && endPos > startPos) { endPos--; }
+                while (value[startPos] == '"' && startPos < endPos) { startPos++; }
+
+                return value.Substring(startPos, endPos - startPos);
+            }
+
+            string RemoveNewLines(string s)
+            {
+                s = s.Replace("\n", String.Empty);
+                s = s.Replace("\r", String.Empty);
+                s = s.Replace("\t", String.Empty);
+                return s;
+            }
         }
     }
 }
