@@ -8,15 +8,27 @@ namespace FileConverter3D.Console
 {
     class Program
     {
-        static void Main(string[] args)
+        private static Runner _runner;
+        private const string CommandLinePrefix = "Converter> ";
+        private const string ExitCommand = "exit";
+        private const string HelpCommand = "help";
+
+        static async Task Main(string[] args)
         {
-            MainAsync().Wait();
+            Initialize();
+
+            if (args.Length == 0)
+                await InteractiveExecutorAsync();
+            else
+                await SingleLineExecutorAsync(args);
+
+            System.Console.ReadKey();
         }
 
-        static async Task MainAsync()
+        private static void Initialize()
         {
             var state = new ConverterState();
-            var r = new Runner(
+            _runner = new Runner(
                 new ImportOperation(state),
                 new ExportOperation(state),
                 new RotateOperation(state),
@@ -24,24 +36,46 @@ namespace FileConverter3D.Console
                 new TranslateOperation(state),
                 new OverwriteSwitch(state)
             );
+        }
 
-            System.Console.WriteLine("FileConverter3D started in interactive mode. Please enter operations.");
-            System.Console.WriteLine();
+        static async Task InteractiveExecutorAsync()
+        {
+            System.Console.WriteLine("FileConverter3D is running in interactive mode. Please type in operations, then press enter.");
+            System.Console.WriteLine($"To see the list of supported operations, use '{HelpCommand}'. To exit, use '{ExitCommand}'.");
 
-            string line;
-            while (!string.IsNullOrEmpty(line = System.Console.ReadLine()))
+            while (true)
             {
-                var inputs = RemoveNewLines(line).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                System.Console.WriteLine();
+                System.Console.Write(CommandLinePrefix);
+                var cmdLine = System.Console.ReadLine();
 
-                try
-                {
-                    await r.Run(inputs);
-                }
-                catch (Exception e)
-                {
-                    System.Console.WriteLine("At least one operation faulted: " + e.Message);
-                }
+                if (String.Equals(cmdLine, ExitCommand, StringComparison.OrdinalIgnoreCase))
+                    break;
+
+                if (string.IsNullOrWhiteSpace(cmdLine))
+                    continue;
+
+                System.Console.WriteLine();
+
+                await SingleLineExecutorAsync(SplitInput(cmdLine));
             }
+        }
+
+        static async Task SingleLineExecutorAsync(string[] args)
+        {
+            try
+            {
+                await _runner.Run(args);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("At least one operation faulted: " + e.Message);
+            }
+        }
+
+        private static string[] SplitInput(string input)
+        {
+            return RemoveNewLines(input).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         private static string RemoveNewLines(string s)
