@@ -8,14 +8,21 @@ namespace FileConverter3D.Core.Common
     /// </summary>
     public class TextLineReader : IDataReader<string>
     {
+        public string StateInfo => $"At line number {_lineNumber}, content: '{_line}'";
+
+        protected int _lineNumber;
+        protected string _line;
+
         public virtual IEnumerable<string> Read(Stream stream)
         {
             using (var reader = new StreamReader(stream))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                    if (!string.IsNullOrWhiteSpace(line))
-                        yield return line.Trim();
+                while ((_line = reader.ReadLine()) != null)
+                {
+                    _lineNumber++;
+                    if (!string.IsNullOrWhiteSpace(_line))
+                        yield return _line.Trim();
+                }
             }
         }
     }

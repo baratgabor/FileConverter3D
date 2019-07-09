@@ -81,13 +81,13 @@ namespace FileConverter3D.Core
                 throw InvalidSig;
 
             if (segments.Length < 4)
-                throw new ArgumentException($"Insufficient number of vertices. A valid face string must consist of minimum 3 vertex segments.");
+                throw new ArgumentException($"Error parsing face: Insufficient number of vertices. A valid face string must consist of minimum 3 vertex segments.");
 
             var face = new Face();
             for (int i = 1; i < segments.Length; i++)
             {
                 if (!TryParseFaceVertex(segments[i], out var faceVertex))
-                    throw new ArgumentException($"Cannot parse face vertex #{i}.");
+                    throw new ArgumentException($"Error parsing face: Cannot parse face vertex #{i}.");
 
                 face.AddFaceVertex(faceVertex);
             }

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="_Interfaces\IStateInfoProvider.cs" />
     <Compile Include="_Interfaces\IFileStreamer.cs" />
     <Compile Include="Common\IO_File\ReadingStream.cs" />
     <Compile Include="Common\IO_File\WritingStream.cs" />

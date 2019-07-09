@@ -1,4 +1,6 @@
-﻿namespace FileConverter3D.Core.Common
+﻿using System;
+
+namespace FileConverter3D.Core.Common
 {
     /// <summary>
     /// Facade class assuming the responsibility of coupling together file importer components.
@@ -24,10 +26,28 @@
             _modelWriter = modelWriter;
         }
 
-        public IModel Import(string filePath) => 
-            _modelWriter.Write(
-                _valueParser.Parse(
-                    _valueReader.Read(
-                        _fileStreamer.GetStream(filePath))));
+        public IModel Import(string filePath)
+        {
+            try
+            {
+                return
+                    _modelWriter.Write(
+                        _valueParser.Parse(
+                            _valueReader.Read(
+                                _fileStreamer.GetStream(filePath))));
+            }
+            catch(Exception e)
+            {
+                string addedContext = default;
+                foreach (var c in new object[] { _fileStreamer, _valueReader, _valueParser, _modelWriter })
+                    if (c is IStateInfoProvider i)
+                        addedContext += i.StateInfo;
+
+                if (addedContext != default)
+                    throw new Exception($"{e.Message} {addedContext}" , e);
+                else
+                    throw;
+            }
+        }
     }
 }
