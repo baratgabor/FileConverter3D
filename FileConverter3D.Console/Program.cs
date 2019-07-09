@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +8,7 @@ namespace FileConverter3D.Console
     class Program
     {
         private static Runner _runner;
+        private static ConverterState _state;
         private const string CommandLinePrefix = "Converter> ";
         private const string ExitCommand = "exit";
         private const string HelpCommand = "help";
@@ -26,14 +25,15 @@ namespace FileConverter3D.Console
 
         private static void Initialize()
         {
-            var state = new ConverterState();
+            _state = new ConverterState();
+            _state.ModelChanged += ModelChangeReport;
             _runner = new Runner(
-                new ImportOperation(state),
-                new ExportOperation(state),
-                new RotateOperation(state),
-                new ScaleOperation(state),
-                new TranslateOperation(state),
-                new OverwriteSwitch(state)
+                new ImportOperation(_state),
+                new ExportOperation(_state),
+                new RotateOperation(_state),
+                new ScaleOperation(_state),
+                new TranslateOperation(_state),
+                new OverwriteSwitch(_state)
             );
         }
 
@@ -114,6 +114,18 @@ namespace FileConverter3D.Console
                 s = s.Replace("\t", String.Empty);
                 return s;
             }
+        }
+
+        private static void ModelChangeReport(IModel newModel)
+        {
+            System.Console.WriteLine();
+
+            if (newModel == null)
+                System.Console.WriteLine($"# Model unloaded.");
+            else
+                System.Console.WriteLine($"# Model loaded: {newModel.Vertices.Count} vertices, {newModel.Faces.Count} faces.");
+
+            System.Console.WriteLine($"# Total memory in use: {GC.GetTotalMemory(true)/1024} KB");
         }
     }
 }
