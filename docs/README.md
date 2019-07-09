@@ -100,7 +100,7 @@ Example:
 
 The console app in the `FileConverter3D.Console` assembly exposes operations in two ways: traditional command line arguments, and interactive mode (when no arguments are specified). Both mode supports endless chaining of operations, and the console runner interprets and executes them in order.
 
-**Available commands and their syntax:**
+**Available commands and their syntax (list accessible in the app using 'help'):**
 
 `import [objascii|stlbinary] "File path"`
 
@@ -114,8 +114,12 @@ The console app in the `FileConverter3D.Console` assembly exposes operations in 
 
 `overwritemode`
 
-**Example use:**
+**Usage example in interactive mode:**
 
-`FileConverter3D.Console.exe overwritemode  import objascii "c:\models\obj model.obj"  scale 2 2 2  rotate 180 0 0  translate 2.5 0 0  export stlbinary "c:\models\stl model.stl"`
+![FileConverter3D console app usage example screenshot](C:\Users\barat\source\repos\FileConverter3D\docs\ConsoleApp.png)
 
-(If you run the executable without command line arguments, it starts in interactive mode, where you can type in and execute commands sequentially. Although interactive mode also supports specifying multiple commands in a single line.)
+As you can observe here too, you can issue multiple commands on the same line, if you want.
+
+You can pass the same command line as an argument to the `.exe`, in which case it executes the commands parsed from that single command line, then exits.
+
+File path can be specified without quotes if it doesn't contain spaces, or enclosed in quotes if it does contain spaces.

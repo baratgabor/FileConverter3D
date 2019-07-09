@@ -2,12 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Moq;
 
 namespace FileConverter3D.IntegrationTests
 {
+    [TestFixture]
+    public class Import_ObjAscii_Tests
+    {
+        public MockRepository MockRepository { get; private set; }
+
+        [SetUp]
+        public void UnitTestBaseSetUp()
+        {
+            MockRepository = new MockRepository(MockBehavior.Strict) { DefaultValue = DefaultValue.Empty };
+        }
+
+
+        [TestCase]
+        public void Import_ObjAscii()
+        {
+            Core.Common.FileImporter<>
+        }
+
+    }
+
     [TestFixture]
     public class ObjAsciiImporterFactory_Tests
     {
