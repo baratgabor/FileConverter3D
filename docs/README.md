@@ -116,7 +116,7 @@ The console app in the `FileConverter3D.Console` assembly exposes operations in 
 
 **Usage example in interactive mode:**
 
-![FileConverter3D console app usage example screenshot](C:\Users\barat\source\repos\FileConverter3D\docs\ConsoleApp.png)
+![FileConverter3D console app usage example screenshot](ConsoleApp.png)
 
 As you can observe here too, you can issue multiple commands on the same line, if you want.
 
