@@ -19,10 +19,23 @@ Soon **stable** for the current feature set, but unit-testing coverage is extrem
 #### ASCII Obj
 
 - Vertices (*'v'*), vertex normals (*'vn'*), vertex textures (*'vt'*), and faces (*'f'*).
+- Supports arbitrary number of face vertices.
+- Supports relative/negative indexes. Converts these into absolute/positive indexes during import.
 
 #### Binary STL
 
 - All features, since this format is simply a list of triangles and their normal. *(During STL export the converter triangulates the (possibly non-tri) faces in the model, and calculates a new face normal. This face normal is currently a primitive face-orthogonal normal, which means this creates a 'faceted' look.)*
+
+## Currently supported transformation features
+
+The matrix transformation system implemented has the following characteristics:
+
+- Supports **rotation** by an arbitrary 3D vector of floats, in degrees.
+- Supports **scaling** by an arbitrary 3D vector of floats.
+- Supports **translation** by an arbitrary 3D vector of floats.
+- Transformations are **applied in the correct order**, i.e. rotate/scale first, translate after.
+- Transformations are **accumulated** into a matrix, and applied all at once.
+- The **integrity of normals is preserved** during transformation (it calculates a special matrix - the transpose of the inverted transformation matrix - for transforming the normals).
 
 # Who's this useful for
 
