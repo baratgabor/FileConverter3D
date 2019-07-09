@@ -41,7 +41,7 @@ The matrix transformation system implemented has the following characteristics:
 
 Potentially useful for you if you're looking for some ideas with regards to how to structure a generalized converter to be able to reuse part of the created components.
 
-This scaffolding divides the conversion into single responsibilities like file reading, data parsing, and writing into a model; expressing this structure through `interface` based contracts and a central model format. The result is that certain components can be reused for multiple file formats, plus you can flexibly use decorators and other wrappers in the composition graph. 
+This scaffolding divides the conversion into single responsibilities like file reading, data parsing, and writing into a model; expressing this structure through `interface` based contracts and a central model format. The result is that certain components can be reused for multiple file formats, plus you can flexibly use decorators and other wrappers in the composited graph. 
 
 For example, the OBJ importer graph looks like this; you can see that it incorporates both OBJ-specific and common components:
 
