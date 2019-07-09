@@ -5,14 +5,14 @@ namespace FileConverter3D.Console
 {
     class RelayCommandConsoleConcurrent : ICommandAsync
     {
-        private readonly string _operationName;
+        public string OperationName { get; }
         private readonly Func<(bool result, string failReason)> _canExecute;
         private readonly Action _execute;
         private bool _executeSynced; // Hack. But wouldn't make sense to refactor for something this trivial.
 
         public RelayCommandConsoleConcurrent(string operationName, Func<(bool result, string failReason)> canExecute, Action execute, bool executeSynced = false)
         {
-            _operationName = operationName;
+            OperationName = operationName;
             _canExecute = canExecute;
             _execute = execute;
             _executeSynced = executeSynced;
@@ -23,20 +23,24 @@ namespace FileConverter3D.Console
 
         public async Task ExecuteAsync()
         {
-            System.Console.Write($"Executing operation '{_operationName}' ... ");
+            System.Console.Write($"Executing operation '{OperationName}' ... ");
 
-            try
+            if (_executeSynced)
+                _execute();
+            else
             {
-                if (_executeSynced)
-                    _execute();
-                else
-                    await Task.Run(_execute);
-            }
-            catch (Exception e)
-            {
-                var message = e is AggregateException ae ? ae.InnerException.Message : e.Message;
-                System.Console.WriteLine("Failed. Reason:" + Environment.NewLine + message);
-                throw;
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        _execute();
+                    }
+                    catch
+                    {
+                        System.Console.WriteLine("Failed.");
+                        throw;
+                    }
+                });
             }
 
             System.Console.WriteLine("Success.");

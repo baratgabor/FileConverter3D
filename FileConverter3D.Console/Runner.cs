@@ -15,7 +15,16 @@ namespace FileConverter3D.Console
 
         public async Task Run(string[] inputs)
         {
-            var commands = ExtractCommands(inputs);
+            List<ICommandAsync> commands = default;
+            try
+            {
+                commands = ExtractCommands(inputs);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Command processing failed. Reason: " + e.Message);
+                return;
+            }
 
             if (!commands.Any())
             {
@@ -23,13 +32,14 @@ namespace FileConverter3D.Console
                 return;
             }
 
-            foreach (var c in commands)
+            for (int i = 0; i < commands.Count; i++)
             {
+                var c = commands[i];
                 var (canExecute, failReason) = c.CanExecute();
                 if (!canExecute)
                 {
-                    System.Console.WriteLine("Operation cannot execute under current state. Reason: " + failReason);
-                    continue;
+                    System.Console.WriteLine($"Operation '{c.OperationName}' cannot execute under current state. Reason: " + failReason);
+                    goto ReturnCancelled;
                 }
 
                 try
@@ -39,8 +49,16 @@ namespace FileConverter3D.Console
                 catch (Exception e)
                 {
                     var msg = e is AggregateException ae ? ae.InnerException.Message : e.Message;
-                    System.Console.WriteLine("Operation failed: " + msg);
+                    System.Console.WriteLine("Operation failed with message: " + msg);
+                    goto ReturnCancelled;
                 }
+                return;
+
+                ReturnCancelled:
+                var remainingOps = commands.Count - 1 - i;
+                if (remainingOps > 0)
+                    System.Console.WriteLine($"The execution of {remainingOps} operation(s) in queue is cancelled.");
+                return;
             }
         }
 

@@ -10,7 +10,7 @@ namespace FileConverter3D.Core
         private readonly char[] SplitSpace = new[] { ' ' };
         private readonly char[] SplitSlash = new[] { '/' };
 
-        private ArgumentException TooFewElements => new ArgumentException("Insufficient number of elements.");
+        private ArgumentException TooFewElements => new ArgumentException("Insufficient number of elements while parsing vector.");
         private ArgumentException InvalidSig => new ArgumentException("Invalid signature in parsable string.");
         private ArgumentException FloatParseFail => new ArgumentException("One or more values in string line cannot be parsed to float.");
 

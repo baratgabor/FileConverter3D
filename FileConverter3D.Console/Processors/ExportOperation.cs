@@ -35,6 +35,7 @@ namespace FileConverter3D.Console
                 throw new ArgumentException($"Invalid {OptionName} type '{exportType}'. Supported types: {String.Join(", ", _typeMap.Keys)}");
 
             return new CompositeCommand(
+                aggregateOperationName: OptionName,
                 // Command for applying transformations, if any set
                 new RelayCommandConsoleConcurrent(
                     "apply prior transformations (if any)",

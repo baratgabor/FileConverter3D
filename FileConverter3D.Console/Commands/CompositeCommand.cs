@@ -5,8 +5,13 @@ namespace FileConverter3D.Console
     class CompositeCommand : ICommandAsync
     {
         private ICommandAsync[] _commands;
+        public string OperationName { get; private set; }
 
-        public CompositeCommand(params ICommandAsync[] commands) => _commands = commands;
+        public CompositeCommand(string aggregateOperationName, params ICommandAsync[] commands)
+        {
+            OperationName = aggregateOperationName;
+            _commands = commands;
+        }
 
         public (bool result, string failReason) CanExecute()
         {
