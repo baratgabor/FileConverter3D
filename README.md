@@ -49,6 +49,7 @@ And the actual import process happens in a reusable `FileImporter<T>` facade cla
 
 # Usage
 
+## Code
 Currently the functionality is exposed in an easy to consume way, through static methods in the `FileConverter3D` class. This static class serves as the composition root of the converter graph. No other parts of the code contain references to concrete implementations; besides the model structs/classes which are considered data containers.
 
 Example:
@@ -71,3 +72,27 @@ Example:
   // Export
   FileConverter3D.Export.StlBinary(model, "c:\mesh.stl");
 ```
+
+## Console interface
+
+The console app in the `FileConverter3D.Console` assembly exposes operations in two ways: traditional command line arguments, and interactive mode (when no arguments are specified). Both mode supports endless chaining of operations, and the console runner interprets and executes them in order.
+
+**Available commands and their syntax:**
+
+`import [objascii|stlbinary] "File path"`
+
+`export [objascii|stlbinary] "File path"`
+
+`translate x y z`
+
+`rotate x y z`
+
+`scale x y z`
+
+`overwritemode`
+
+**Example use:**
+
+`FileConverter3D.Console.exe overwritemode  import objascii "c:\models\obj model.obj"  scale 2 2 2  rotate 180 0 0  translate 2.5 0 0  export stlbinary "c:\models\stl model.stl"`
+
+(If you run the executable without command line arguments, it starts in interactive mode, where you can type in and execute commands sequentially. Although interactive mode also supports specifying multiple commands in a single line.)
