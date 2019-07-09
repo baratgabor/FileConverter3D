@@ -52,7 +52,8 @@ namespace FileConverter3D.Console
                     System.Console.WriteLine("Operation failed with message: " + msg);
                     goto ReturnCancelled;
                 }
-                return;
+
+                continue;
 
                 ReturnCancelled:
                 var remainingOps = commands.Count - 1 - i;
