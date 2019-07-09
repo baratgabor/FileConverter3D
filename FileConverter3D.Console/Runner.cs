@@ -7,6 +7,8 @@ namespace FileConverter3D.Console
 {
     class Runner
     {
+        public IEnumerable<IInputProcessor> Processors => _processors;
+
         private IInputProcessor[] _processors;
 
         public Runner(params IInputProcessor[] processors) => _processors = processors;

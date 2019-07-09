@@ -4,7 +4,7 @@
     {
         string OptionName { get; }
         int ArgumentCount { get; }
-
+        string HelpText { get; }
         ICommandAsync Process(string[] args);
     }
 }

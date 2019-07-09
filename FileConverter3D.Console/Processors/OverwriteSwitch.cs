@@ -3,8 +3,8 @@
     class OverwriteSwitch : IInputProcessor
     {
         public string OptionName { get; set; } = "overwritemode";
-
         public int ArgumentCount { get; set; } = 0;
+        public string HelpText => "overwritemode (allows 'export' to overwrite existing files)";
 
         private ConverterState _state;
 

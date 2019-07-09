@@ -8,6 +8,7 @@ namespace FileConverter3D.Console
     {
         public string OptionName { get; } = "import";
         public int ArgumentCount { get; } = 2;
+        public string HelpText => $"import [{String.Join("|", _typeMap.Keys)}] \"Directory\\Model name.ext\"";
 
         private ConverterState _state;
         private Dictionary<string, Func<string, IModel>> _typeMap = new Dictionary<string, Func<string, IModel>>()

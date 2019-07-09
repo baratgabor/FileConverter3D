@@ -4,6 +4,7 @@
     {
         public abstract string OptionName { get; }
         public abstract int ArgumentCount { get; }
+        public string HelpText => $"{OptionName} x y z (where x, y, z is an int/float)";
 
         private ConverterState _state;
 

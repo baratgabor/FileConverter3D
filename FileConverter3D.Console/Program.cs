@@ -9,15 +9,18 @@ namespace FileConverter3D.Console
     {
         private static Runner _runner;
         private static ConverterState _state;
+        private static bool _interactiveMode;
         private const string CommandLinePrefix = "Converter> ";
         private const string ExitCommand = "exit";
         private const string HelpCommand = "help";
+        private const string ClearCommand = "clear";
 
         static async Task Main(string[] args)
         {
             Initialize();
+            _interactiveMode = args.Length == 0;
 
-            if (args.Length == 0)
+            if (_interactiveMode)
                 await InteractiveExecutorAsync();
             else
                 await SingleLineExecutorAsync(args);
@@ -26,7 +29,7 @@ namespace FileConverter3D.Console
         private static void Initialize()
         {
             _state = new ConverterState();
-            _state.ModelChanged += ModelChangeReport;
+            _state.ModelChanged += PrintModelChange;
             _runner = new Runner(
                 new ImportOperation(_state),
                 new ExportOperation(_state),
@@ -39,6 +42,7 @@ namespace FileConverter3D.Console
 
         static async Task InteractiveExecutorAsync()
         {
+            System.Console.WriteLine();
             System.Console.WriteLine("FileConverter3D is running in interactive mode. Please type in operations, then press enter.");
             System.Console.WriteLine($"To see the list of supported operations, use '{HelpCommand}'. To exit, use '{ExitCommand}'.");
 
@@ -48,11 +52,23 @@ namespace FileConverter3D.Console
                 System.Console.Write(CommandLinePrefix);
                 var cmdLine = System.Console.ReadLine();
 
-                if (String.Equals(cmdLine, ExitCommand, StringComparison.OrdinalIgnoreCase))
-                    break;
-
                 if (string.IsNullOrWhiteSpace(cmdLine))
                     continue;
+
+                if (String.Equals(cmdLine.Trim(), ExitCommand, StringComparison.OrdinalIgnoreCase))
+                    break;
+
+                if (String.Equals(cmdLine.Trim(), ClearCommand, StringComparison.OrdinalIgnoreCase))
+                {
+                    System.Console.Clear();
+                    continue;
+                }
+
+                if (String.Equals(cmdLine.Trim(), HelpCommand, StringComparison.OrdinalIgnoreCase))
+                {
+                    PrintHelp();
+                    continue;
+                }
 
                 System.Console.WriteLine();
 
@@ -62,6 +78,12 @@ namespace FileConverter3D.Console
 
         static async Task SingleLineExecutorAsync(string[] args)
         {
+            if (args.Length == 1 && String.Equals(args[0].Trim(), HelpCommand, StringComparison.OrdinalIgnoreCase))
+            {
+                PrintHelp();
+                return;
+            }
+
             try
             {
                 await _runner.Run(args);
@@ -116,7 +138,7 @@ namespace FileConverter3D.Console
             }
         }
 
-        private static void ModelChangeReport(IModel newModel)
+        private static void PrintModelChange(IModel newModel)
         {
             System.Console.WriteLine();
 
@@ -126,6 +148,19 @@ namespace FileConverter3D.Console
                 System.Console.WriteLine($"# Model loaded: {newModel.Vertices.Count} vertices, {newModel.Faces.Count} faces.");
 
             System.Console.WriteLine($"# Total memory in use: {GC.GetTotalMemory(true)/1024} KB");
+        }
+
+        private static void PrintHelp()
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("Available converter operations:");
+            System.Console.WriteLine();
+
+            foreach (var p in _runner.Processors)
+                System.Console.WriteLine(" " + p.HelpText);
+
+            if (!_interactiveMode)
+                System.Console.WriteLine(Environment.NewLine + "Additionally, if you execute the program without arguments, it starts in 'interactive' prompt where you can type in commands in seqeuence.");
         }
     }
 }

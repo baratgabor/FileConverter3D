@@ -10,6 +10,7 @@ namespace FileConverter3D.Console
     {
         public string OptionName { get; } = "export";
         public int ArgumentCount { get; } = 2;
+        public string HelpText => $"export [{String.Join("|", _typeMap.Keys)}] \"Directory\\Model name.ext\"";
 
         private ConverterState _state;
         private Dictionary<string, Action<IModel, string>> _typeMap = new Dictionary<string, Action<IModel, string>>()
