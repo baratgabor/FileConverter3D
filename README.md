@@ -12,7 +12,17 @@ Not really optimized, besides "don't be an idiot" sort of basic concerns.
 
 # Current status
 
-Unstable, under development, but working/functional. The basic structure is semi-solid already, so I'll start adding tests soon.
+Soon **stable** for the current feature set, but unit-testing coverage is extremely poor at the moment.
+
+## Currently supported 3D file format features
+
+#### ASCII Obj
+
+- Vertices (*'v'*), vertex normals (*'vn'*), vertex textures (*'vt'*), and faces (*'f'*).
+
+#### Binary STL
+
+- All features, since this format is simply a list of triangles and their normal. *(During STL export the converter triangulates the (possibly non-tri) faces in the model, and calculates a new face normal. This face normal is currently a primitive face-orthogonal normal, which means this creates a 'faceted' look.)*
 
 # Who's this useful for
 
