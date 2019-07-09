@@ -8,7 +8,7 @@ namespace FileConverter3D.Core.Common
     /// </summary>
     public class TextLineReader : IDataReader<string>
     {
-        public string StateInfo => $"At line number {_lineNumber}, content: '{_line}'";
+        public string StateInfo => _lineNumber == 0 ? string.Empty : $"At line number {_lineNumber}, content: '{_line}'";
 
         protected int _lineNumber;
         protected string _line;
