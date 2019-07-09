@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace FileConverter3D.Core.Common
 {
@@ -39,8 +40,9 @@ namespace FileConverter3D.Core.Common
             catch(Exception e)
             {
                 string addedContext = default;
-                foreach (var c in new object[] { _fileStreamer, _valueReader, _valueParser, _modelWriter })
-                    if (c is IStateInfoProvider i)
+
+                foreach (var f in this.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic))
+                    if (f.GetValue(this) is IStateInfoProvider i)
                         addedContext += i.StateInfo;
 
                 if (addedContext != default)
