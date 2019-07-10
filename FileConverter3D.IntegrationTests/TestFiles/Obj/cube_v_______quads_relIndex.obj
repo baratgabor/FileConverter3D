@@ -1,0 +1,30 @@
+#	                Vertices: 8
+#	                  Points: 0
+#	                   Lines: 0
+#	                   Faces: 6
+#	               Materials: 1
+
+o 1
+
+# Vertex list
+
+v -0.5 -0.5 0.5
+v -0.5 -0.5 -0.5
+v -0.5 0.5 -0.5
+v -0.5 0.5 0.5
+v 0.5 -0.5 0.5
+v 0.5 -0.5 -0.5
+v 0.5 0.5 -0.5
+v 0.5 0.5 0.5
+
+# Point/Line/Face list
+
+usemtl Default
+f 4 3 2 1
+f 2 -3 -4 1
+f 3 -2 -3 2
+f -1 -2 3 4
+f -4 -1 4 1
+f -3 -2 -1 -4
+
+# End of file
