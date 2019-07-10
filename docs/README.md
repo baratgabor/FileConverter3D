@@ -12,7 +12,11 @@ Not really optimized, besides "don't be an idiot" sort of basic concerns.
 
 # Current status
 
-Soon **stable** for the current feature set, but unit-testing coverage is extremely poor at the moment.
+[![Build Status](https://travis-ci.com/baratgabor/FileConverter3D.svg?branch=master)](https://travis-ci.com/baratgabor/FileConverter3D)
+
+Semi **stable**. Unit-test coverage is poor, but integration tests should give some assurance.
+
+The console runner is not tested via automated tests, but based on manual tests it should also be stable.
 
 ## Currently supported 3D file format features
 
