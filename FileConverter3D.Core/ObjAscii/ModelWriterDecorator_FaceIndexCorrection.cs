@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FileConverter3D.Core.ObjAscii
 {
@@ -49,7 +50,7 @@ namespace FileConverter3D.Core.ObjAscii
             }
 
             bool IsNegativeIndexed(Face face)
-                => face.Vertices[0].VertexIndex < 0;
+                => face.Vertices.Any(v => v.VertexIndex < 0);
         }
 
         private IValue ConvertToPositiveIndex(Face f)
