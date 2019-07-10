@@ -12,7 +12,7 @@ namespace FileConverter3D
         public int? TextureCoordIndex { get; }
         public int? NormalIndex { get; }
 
-        public FaceVertex(int vertexIndex, int? textureCoordIndex, int? normalIndex)
+        public FaceVertex(int vertexIndex, int? textureCoordIndex = null, int? normalIndex = null)
         {
             VertexIndex = vertexIndex;
             TextureCoordIndex = textureCoordIndex;

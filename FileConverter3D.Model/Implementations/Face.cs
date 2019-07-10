@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FileConverter3D
 {
@@ -38,5 +39,8 @@ namespace FileConverter3D
 
             return true;
         }
+
+        public override string ToString()
+            => Vertices.Aggregate("", (str, next) => str += $"[V:{next.VertexIndex} VT:{next.TextureCoordIndex} VN:{next.NormalIndex}] ");
     }
 }

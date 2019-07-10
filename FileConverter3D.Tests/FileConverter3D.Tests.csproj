@@ -9,7 +9,7 @@
     <ProjectGuid>{089AB8D2-9EB3-496C-9D37-951571ED8CD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileConverter3D.UnitTests</RootNamespace>
+    <RootNamespace>FileConverter3D.Tests</RootNamespace>
     <AssemblyName>FileConverter3D.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -61,7 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegrationTests\ObjAsciiImporterFactory_Tests.cs" />
+    <Compile Include="IntegrationTests\ObjAsciiImport\Import_ObjAscii_Tests.cs" />
+    <Compile Include="IntegrationTests\ObjAsciiImport\_TestConfiguration.cs" />
+    <Compile Include="TestModel\TestModel.cs" />
+    <Compile Include="TestModel\TestFile.cs" />
     <Compile Include="UnitTests\Core.Common\TextLineReader_Tests.cs" />
     <Compile Include="Vector3_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +72,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="TestFiles\Obj\cube_v_vt_vn_tris_absIndex.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Obj\cube_v_vt____tris_absIndex.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Obj\cube_v____vn_tris_absIndex.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Obj\cube_v_______quads_absIndex.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Obj\cube_v_______quads_relIndex.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\Obj\cube_v_______tris_absIndex.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileConverter3D.Core\FileConverter3D.Core.csproj">
@@ -89,6 +110,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="TestFiles\Stl\" />
     <Folder Include="UnitTests\Core.StlBinary\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
