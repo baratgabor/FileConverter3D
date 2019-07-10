@@ -3,5 +3,5 @@ solution: FileConverter3D.sln
 install:
   - nuget restore FileConverter3D.sln
 script:
-  - msbuild /p:Configuration=Release FileConverter3D.sln
+  - msbuild /p:Configuration=Release FileConverter3D.sln /langversion:7.2
   - mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe ./FileConverter3D.IntegrationTests/bin/Release/FileConverter3D.IntegrationTests.dll
