@@ -10,7 +10,14 @@ namespace FileConverter3D.Tests.IntegrationTests.ObjAsciiImport
         // Float coordinate in cube test files. All vertices are combinations of plus and minus of this value.
         private const float C = 0.5f;
 
-        public static TestFile cube_v_______quads_relIndex => cube_v_______quads_absIndex; // Relative indexes should be converted to absolute
+        public static TestFile cube_v_______quads_relIndex {
+            get {
+                // Relative indices should be converted to absolute; resulting model should be the same.
+                var f = cube_v_______quads_absIndex;
+                f.FileName = "cube_v_______quads_relIndex.obj";
+                return f;
+            }
+        }
 
         public static TestFile cube_v_______quads_absIndex => new TestFile()
         {
