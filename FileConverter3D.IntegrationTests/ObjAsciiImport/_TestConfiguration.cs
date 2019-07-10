@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace FileConverter3D.Tests.IntegrationTests.ObjAsciiImport
 {
     public static class TestConfiguration
     {
-        public const string TestFilePath = "TestFiles\\Obj";
+        public static string TestFilePath = Path.Combine("TestFiles", "Obj");
 
         // Float coordinate in cube test files. All vertices are combinations of plus and minus of this value.
         private const float C = 0.5f;
