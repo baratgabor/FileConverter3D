@@ -1,0 +1,7 @@
+language: csharp
+solution: FileConverter3D.sln
+install:
+  - nuget restore FileConverter3D.sln
+script:
+  - msbuild /p:Configuration=Release SuffixTree.sln
+  - mono ./packages/NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe ./FileConverter3D.IntegrationTests/bin/Release/FileConverter3D.IntegrationTests.dll
